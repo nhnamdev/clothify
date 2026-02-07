@@ -117,7 +117,7 @@ export default function Homepage() {
       
       {/* Hero Title */}
       <div className="-translate-y-1/2 absolute flex flex-col font-['Integral_CF',sans-serif] font-bold justify-center leading-[0] left-[100px] not-italic text-[64px] text-black top-[323.5px] max-w-[577px]">
-        <p className="leading-[64px] whitespace-pre-wrap">TÌM QUẦN ÁO PHÙ HỢP VỚI PHONG CÁCH CỦA BẠN</p>
+        <p className="leading-[64px] whitespace-pre-wrap">TÌM QUẦN ÁO THEO PHONG CÁCH CỦA BẠN</p>
       </div>
       
       {/* Hero Description */}
@@ -640,7 +640,7 @@ export default function Homepage() {
         </div>
         <div className="content-stretch flex flex-col gap-[26px] items-start not-italic relative shrink-0 text-[16px]">
           <p className="font-['Satoshi',sans-serif] font-medium leading-[18px] relative shrink-0 text-black tracking-[3px] uppercase">
-            CÂU HỮI
+            CÂU HỎI
           </p>
           <div className="font-['Satoshi',sans-serif] leading-[19px] relative shrink-0 text-[rgba(0,0,0,0.6)] w-[149px] whitespace-pre-wrap cursor-pointer">
             <p className="mb-2 hover:text-black transition-colors">Tài Khoản</p>
