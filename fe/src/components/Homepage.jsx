@@ -64,9 +64,9 @@ export default function Homepage() {
       
       {/* Top Banner */}
       <div className="absolute bg-black h-[38px] left-0 overflow-clip top-0 w-full">
-        <p className="absolute font-['Satoshi',sans-serif] font-normal leading-[0] left-[calc(50%-176px)] text-[14px] text-white top-[calc(50%-10px)]">
-          <span className="leading-[normal]">{`Sign up and get 20% off to your first order. `}</span>
-          <span className="[text-decoration-skip-ink:none] decoration-solid leading-[normal] underline cursor-pointer">Sign Up Now</span>
+        <p className="absolute font-['Satoshi',sans-serif] font-normal leading-[0] left-[calc(50%-200px)] text-[14px] text-white top-[calc(50%-10px)]">
+          <span className="leading-[normal]">{`Đăng ký và nhận giảm giá 20% cho đơn hàng đầu tiên. `}</span>
+          <span className="[text-decoration-skip-ink:none] decoration-solid leading-[normal] underline cursor-pointer">Đăng Ký Ngay</span>
         </p>
         <div className="-translate-y-1/2 absolute right-[100px] size-[20px] top-1/2 cursor-pointer" data-name="Frame">
           <img alt="close" className="block max-w-none size-full" src={imgFrame} />
@@ -81,20 +81,20 @@ export default function Homepage() {
         <div className="content-stretch flex gap-[24px] items-center relative shrink-0">
           <div className="content-stretch flex gap-[4px] items-center relative shrink-0 cursor-pointer">
             <p className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-black">
-              Shop
+              Cửa Hàng
             </p>
             <div className="relative shrink-0 size-[16px]" data-name="Frame">
               <img alt="" className="block max-w-none size-full" src={imgFrame1} />
             </div>
           </div>
           <p className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-black cursor-pointer">
-            On Sale
+            Khuyến Mãi
           </p>
           <p className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-black cursor-pointer">
-            New Arrivals
+            Hàng Mới Về
           </p>
           <p className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-black cursor-pointer">
-            Brands
+            Thương Hiệu
           </p>
         </div>
         <div className="bg-[#f0f0f0] content-stretch flex flex-[1_0_0] gap-[12px] items-start min-h-px min-w-px overflow-clip px-[16px] py-[12px] relative rounded-[62px]">
@@ -102,7 +102,7 @@ export default function Homepage() {
             <img alt="" className="block max-w-none size-full" src={imgFrame2} />
           </div>
           <p className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-[rgba(0,0,0,0.4)]">
-            Search for products...
+            Tìm kiếm sản phẩm...
           </p>
         </div>
         <div className="content-stretch flex gap-[14px] items-start relative shrink-0">
@@ -117,18 +117,18 @@ export default function Homepage() {
       
       {/* Hero Title */}
       <div className="-translate-y-1/2 absolute flex flex-col font-['Integral_CF',sans-serif] font-bold justify-center leading-[0] left-[100px] not-italic text-[64px] text-black top-[323.5px] max-w-[577px]">
-        <p className="leading-[64px] whitespace-pre-wrap">FIND CLOTHES THAT MATCHES YOUR STYLE</p>
+        <p className="leading-[64px] whitespace-pre-wrap">TÌM QUẦN ÁO PHÙ HỢP VỚI PHONG CÁCH CỦA BẠN</p>
       </div>
       
       {/* Hero Description */}
       <p className="absolute font-['Satoshi',sans-serif] leading-[22px] left-[100px] not-italic text-[16px] text-[rgba(0,0,0,0.6)] top-[442px] max-w-[545px] whitespace-pre-wrap">
-        Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.
+        Khám phá bộ sưu tập đa dạng của chúng tôi với những sản phẩm được chế tác tỉ mỉ, được thiết kế để tôn lên cá tính và phù hợp với phong cách riêng của bạn.
       </p>
       
       {/* Shop Now Button */}
       <button className="absolute bg-black content-stretch flex h-[52px] items-center justify-center left-[100px] overflow-clip px-[54px] py-[16px] rounded-[62px] top-[507px] w-[210px] cursor-pointer hover:bg-gray-800 transition-colors">
         <p className="font-['Satoshi',sans-serif] font-medium leading-[normal] not-italic relative shrink-0 text-[16px] text-white">
-          Shop Now
+          Mua Ngay
         </p>
       </button>
       
@@ -139,7 +139,7 @@ export default function Homepage() {
             <p className="leading-[normal]">200+</p>
           </div>
           <p className="font-['Satoshi',sans-serif] leading-[22px] relative shrink-0 text-[16px] text-[rgba(0,0,0,0.6)]">
-            International Brands
+            Thương Hiệu Quốc Tế
           </p>
         </div>
         <div className="flex flex-row items-center self-stretch">
@@ -158,7 +158,7 @@ export default function Homepage() {
             <p className="leading-[normal]">2,000+</p>
           </div>
           <p className="font-['Satoshi',sans-serif] leading-[22px] relative shrink-0 text-[16px] text-[rgba(0,0,0,0.6)]">
-            High-Quality Products
+            Sản Phẩm Chất Lượng Cao
           </p>
         </div>
         <div className="flex flex-row items-center self-stretch">
@@ -177,7 +177,7 @@ export default function Homepage() {
             <p className="leading-[normal]">30,000+</p>
           </div>
           <p className="font-['Satoshi',sans-serif] leading-[22px] relative shrink-0 text-[16px] text-[rgba(0,0,0,0.6)]">
-            Happy Customers
+            Khách Hàng Hài Lòng
           </p>
         </div>
       </div>
@@ -206,7 +206,7 @@ export default function Homepage() {
       
       {/* NEW ARRIVALS Section */}
       <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['Integral_CF',sans-serif] font-bold justify-center leading-[0] left-[calc(50%-0.5px)] not-italic text-[48px] text-black text-center top-[1020px] whitespace-nowrap">
-        <p className="leading-[normal]">NEW ARRIVALS</p>
+        <p className="leading-[normal]">HÀNG MỚI VỀ</p>
       </div>
       
       {/* New Arrivals Products */}
@@ -233,7 +233,7 @@ export default function Homepage() {
       
       {/* Product Names & Ratings */}
       <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[100px] not-italic text-[20px] text-black top-[1431.5px] whitespace-nowrap">
-        <p className="leading-[normal]">T-SHIRT WITH TAPE DETAILS</p>
+        <p className="leading-[normal]">ÁO THUN CHI TIẾT BĂNG KEO</p>
       </div>
       <div className="absolute content-stretch flex gap-[13px] items-center left-[100px] top-[1453px]">
         <div className="h-[18.49px] relative shrink-0 w-[104px]">
@@ -251,7 +251,7 @@ export default function Homepage() {
       </div>
       
       <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[calc(25%+55px)] not-italic text-[20px] text-black top-[1431.5px] whitespace-nowrap">
-        <p className="leading-[normal]">SKINNY FIT JEANS</p>
+        <p className="leading-[normal]">QUẦN JEANS ÔM</p>
       </div>
       <div className="absolute content-stretch flex gap-[13px] items-center left-[calc(25%+55px)] top-[1453px]">
         <div className="h-[18.49px] relative shrink-0 w-[80.198px]">
@@ -277,7 +277,7 @@ export default function Homepage() {
       </div>
       
       <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[calc(50%+10px)] not-italic text-[20px] text-black top-[1431.5px] whitespace-nowrap">
-        <p className="leading-[normal]">CHECKERED SHIRT</p>
+        <p className="leading-[normal]">SƠ MI KẾ Ô</p>
       </div>
       <div className="absolute content-stretch flex gap-[13px] items-center left-[calc(50%+10px)] top-[1453px]">
         <div className="h-[18.49px] relative shrink-0 w-[104px]">
@@ -293,7 +293,7 @@ export default function Homepage() {
       </div>
       
       <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[calc(75%-35px)] not-italic text-[20px] text-black top-[1431.5px] whitespace-nowrap">
-        <p className="leading-[normal]">SLEEVE STRIPED T-SHIRT</p>
+        <p className="leading-[normal]">ÁO THUN TAY KẾ SỌC</p>
       </div>
       <div className="absolute content-stretch flex gap-[13px] items-center left-[calc(75%-35px)] top-[1453px]">
         <div className="h-[18.49px] relative shrink-0 w-[104px]">
@@ -321,7 +321,7 @@ export default function Homepage() {
       {/* View All Button */}
       <button className="-translate-x-1/2 absolute border border-[rgba(0,0,0,0.1)] border-solid content-stretch flex h-[52px] items-center justify-center left-1/2 overflow-clip px-[54px] py-[16px] rounded-[62px] top-[1548px] w-[218px] cursor-pointer hover:bg-gray-50 transition-colors">
         <p className="font-['Satoshi',sans-serif] font-medium leading-[normal] not-italic relative shrink-0 text-[16px] text-black">
-          View All
+          Xem Tất Cả
         </p>
       </button>
       
@@ -334,7 +334,7 @@ export default function Homepage() {
       
       {/* TOP SELLING Section */}
       <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['Integral_CF',sans-serif] font-bold justify-center leading-[0] left-[calc(50%-1px)] not-italic text-[48px] text-black text-center top-[1757px] whitespace-nowrap">
-        <p className="leading-[normal]">TOP SELLING</p>
+        <p className="leading-[normal]">BÁN CHẠY NHẤT</p>
       </div>
       
       {/* Top Selling Products */}
@@ -361,7 +361,7 @@ export default function Homepage() {
       
       {/* Top Selling Product Details */}
       <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[100px] not-italic text-[20px] text-black top-[2168.5px] whitespace-nowrap">
-        <p className="leading-[normal]">VERTICAL STRIPED SHIRT</p>
+        <p className="leading-[normal]">SƠ MI SỌC DỌC</p>
       </div>
       <div className="absolute content-stretch flex gap-[13px] items-center left-[100px] top-[2190px]">
         <div className="h-[18.49px] relative shrink-0 w-[113.697px]">
@@ -385,7 +385,7 @@ export default function Homepage() {
       </div>
       
       <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[calc(25%+55px)] not-italic text-[20px] text-black top-[2168.5px] whitespace-nowrap">
-        <p className="leading-[normal]">COURAGE GRAPHIC T-SHIRT</p>
+        <p className="leading-[normal]">ÁO THUN GRAPHIC COURAGE</p>
       </div>
       <div className="absolute content-stretch flex gap-[13px] items-center left-[calc(25%+55px)] top-[2190px]">
         <div className="h-[18.49px] relative shrink-0 w-[89.896px]">
@@ -401,7 +401,7 @@ export default function Homepage() {
       </div>
       
       <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[calc(50%+10px)] not-italic text-[20px] text-black top-[2168.5px] whitespace-nowrap">
-        <p className="leading-[normal]">LOOSE FIT BERMUDA SHORTS</p>
+        <p className="leading-[normal]">QUẦN SHORT BERMUDA RỘNG</p>
       </div>
       <div className="absolute content-stretch flex gap-[13px] items-center left-[calc(50%+10px)] top-[2190px]">
         <div className="h-[18.49px] relative shrink-0 w-[66.094px]">
@@ -417,7 +417,7 @@ export default function Homepage() {
       </div>
       
       <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[calc(75%-35px)] not-italic text-[20px] text-black top-[2168.5px] whitespace-nowrap">
-        <p className="leading-[normal]">FADED SKINNY JEANS</p>
+        <p className="leading-[normal]">QUẦN JEANS ÔM PHỚI MÀU</p>
       </div>
       <div className="absolute content-stretch flex gap-[13px] items-center left-[calc(75%-35px)] top-[2190px]">
         <div className="h-[18.49px] relative shrink-0 w-[104px]">
@@ -437,14 +437,14 @@ export default function Homepage() {
       {/* View All Button 2 */}
       <button className="-translate-x-1/2 absolute border border-[rgba(0,0,0,0.1)] border-solid content-stretch flex h-[52px] items-center justify-center left-1/2 overflow-clip px-[54px] py-[16px] rounded-[62px] top-[2285px] w-[218px] cursor-pointer hover:bg-gray-50 transition-colors">
         <p className="font-['Satoshi',sans-serif] font-medium leading-[normal] not-italic relative shrink-0 text-[16px] text-black">
-          View All
+          Xem Tất Cả
         </p>
       </button>
       
       {/* BROWSE BY DRESS STYLE */}
       <div className="absolute bg-[#f0f0f0] h-[866px] left-[100px] right-[100px] overflow-clip rounded-[40px] top-[2417px]">
         <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['Integral_CF',sans-serif] font-bold justify-center leading-[0] left-1/2 not-italic text-[48px] text-black text-center top-[99px] whitespace-nowrap">
-          <p className="leading-[normal]">BROWSE BY DRESS STYLE</p>
+          <p className="leading-[normal]">KHÁM PHÁ THEO PHONG CÁCH</p>
         </div>
         <div className="absolute bg-white h-[289px] left-[64px] overflow-clip rounded-[20px] top-[192px] w-[407px] cursor-pointer hover:shadow-lg transition-shadow">
           <div className="absolute flex h-[649px] items-center justify-center left-[-347px] top-[-122px] w-[973px]">
@@ -455,7 +455,7 @@ export default function Homepage() {
             </div>
           </div>
           <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[36px] not-italic text-[36px] text-black top-[49.5px] whitespace-nowrap">
-            <p className="leading-[normal]">Casual</p>
+            <p className="leading-[normal]">Thường Ngày</p>
           </div>
         </div>
         <div className="absolute bg-white h-[289px] left-[768px] overflow-clip rounded-[20px] top-[501px] w-[407px] cursor-pointer hover:shadow-lg transition-shadow">
@@ -463,7 +463,7 @@ export default function Homepage() {
             <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage16} />
           </div>
           <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[36px] not-italic text-[36px] text-black top-[49.5px] whitespace-nowrap">
-            <p className="leading-[normal]">Gym</p>
+            <p className="leading-[normal]">Thể Thao</p>
           </div>
         </div>
         <div className="absolute bg-white h-[289px] left-[491px] overflow-clip rounded-[20px] top-[192px] w-[684px] cursor-pointer hover:shadow-lg transition-shadow">
@@ -471,7 +471,7 @@ export default function Homepage() {
             <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage17} />
           </div>
           <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[36px] not-italic text-[36px] text-black top-[49.5px] whitespace-nowrap">
-            <p className="leading-[normal]">Formal</p>
+            <p className="leading-[normal]">Trang Trọng</p>
           </div>
         </div>
         <div className="absolute bg-white h-[289px] left-[64px] overflow-clip rounded-[20px] top-[501px] w-[684px] cursor-pointer hover:shadow-lg transition-shadow">
@@ -479,14 +479,14 @@ export default function Homepage() {
             <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage18} />
           </div>
           <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[36px] not-italic text-[36px] text-black top-[49.5px] whitespace-nowrap">
-            <p className="leading-[normal]">Party</p>
+            <p className="leading-[normal]">Tiệc Tùng</p>
           </div>
         </div>
       </div>
       
       {/* OUR HAPPY CUSTOMERS */}
       <div className="-translate-y-1/2 absolute flex flex-col font-['Integral_CF',sans-serif] font-bold justify-center leading-[0] left-[calc(29.17%-320px)] not-italic text-[48px] text-black top-[3392px] whitespace-nowrap">
-        <p className="leading-[normal]">OUR HAPPY CUSTOMERS</p>
+        <p className="leading-[normal]">KHÁCH HÀNG HÀI LÒNG</p>
       </div>
       
       {/* Customer Reviews with Navigation */}
@@ -521,7 +521,7 @@ export default function Homepage() {
                   <img alt="verified" className="block max-w-none size-full" src={imgFrame5} />
                 </div>
               </div>
-              <p className="font-['Satoshi',sans-serif] leading-[22px] min-w-full not-italic relative shrink-0 text-[16px] text-[rgba(0,0,0,0.6)] w-[min-content] whitespace-pre-wrap">{`"I'm blown away by the quality and style of the clothes I received from Clothify. From casual wear to elegant dresses, every piece I've bought has exceeded my expectations."`}</p>
+              <p className="font-['Satoshi',sans-serif] leading-[22px] min-w-full not-italic relative shrink-0 text-[16px] text-[rgba(0,0,0,0.6)] w-[min-content] whitespace-pre-wrap">{`"Tôi rất ấn tượng với chất lượng và phong cách của những bộ quần áo tôi nhận được từ Clothify. Từ trang phục thường ngày đến những chiếc đầm thanh lịch, mỗi sản phẩm tôi mua đều vượt quá mong đợi của tôi."`}</p>
             </div>
           </div>
         </div>
@@ -542,7 +542,7 @@ export default function Homepage() {
                   <img alt="verified" className="block max-w-none size-full" src={imgFrame5} />
                 </div>
               </div>
-              <p className="font-['Satoshi',sans-serif] leading-[22px] min-w-full not-italic relative shrink-0 text-[16px] text-[rgba(0,0,0,0.6)] w-[min-content] whitespace-pre-wrap">{`"Finding clothes that align with my personal style used to be a challenge until I discovered Clothify. The range of options they offer is truly remarkable, catering to a variety of tastes and occasions."`}</p>
+              <p className="font-['Satoshi',sans-serif] leading-[22px] min-w-full not-italic relative shrink-0 text-[16px] text-[rgba(0,0,0,0.6)] w-[min-content] whitespace-pre-wrap">{`"Việc tìm kiếm quần áo phù hợp với phong cách cá nhân từng là thách thức cho đến khi tôi khám phá ra Clothify. Sự đa dạng mà họ cung cấp thực sự đáng chú ý, phục vụ nhiều sở thích và dịp khác nhau."`}</p>
             </div>
           </div>
         </div>
@@ -563,7 +563,7 @@ export default function Homepage() {
                   <img alt="verified" className="block max-w-none size-full" src={imgFrame5} />
                 </div>
               </div>
-              <p className="font-['Satoshi',sans-serif] leading-[22px] min-w-full not-italic relative shrink-0 text-[16px] text-[rgba(0,0,0,0.6)] w-[min-content] whitespace-pre-wrap">{`"As someone who's always on the lookout for unique fashion pieces, I'm thrilled to have stumbled upon Clothify. The selection of clothes is not only diverse but also on-point with the latest trends."`}</p>
+              <p className="font-['Satoshi',sans-serif] leading-[22px] min-w-full not-italic relative shrink-0 text-[16px] text-[rgba(0,0,0,0.6)] w-[min-content] whitespace-pre-wrap">{`"Với tư cách là người luôn tìm kiếm những món đồ thời trang độc đáo, tôi rất vui mừng khi tìm thấy Clothify. Bộ sưu tập quần áo không chỉ đa dạng mà còn bắt kịp xu hướng mới nhất."`}</p>
             </div>
           </div>
         </div>
@@ -572,25 +572,25 @@ export default function Homepage() {
       {/* Newsletter Section */}
       <div className="absolute bg-black content-stretch flex items-center justify-between left-[100px] right-[100px] overflow-clip px-[64px] py-[36px] rounded-[20px] top-[3781px]">
         <p className="font-['Integral_CF',sans-serif] font-bold h-[94px] leading-[45px] not-italic relative shrink-0 text-[40px] text-white w-[551px] whitespace-pre-wrap">
-          STAY UPTO DATE ABOUT OUR LATEST OFFERS
+          CẬP NHẬT ƯU ĐÃI MỚI NHẤT CỦA CHÚNG TÔI
         </p>
         <div className="content-stretch flex flex-col gap-[14px] items-start relative shrink-0">
           <div className="bg-white content-stretch flex gap-[12px] items-start overflow-clip px-[16px] py-[12px] relative rounded-[62px] shrink-0 w-[349px]">
             <div className="relative shrink-0 size-[24px]" data-name="Frame">
               <img alt="" className="block max-w-none size-full" src={imgFrame6} />
             </div>
-            <input type="email" placeholder="Enter your email address" className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-[rgba(0,0,0,0.4)] bg-transparent border-none outline-none w-full" />
+            <input type="email" placeholder="Nhập địa chỉ email của bạn" className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-[rgba(0,0,0,0.4)] bg-transparent border-none outline-none w-full" />
           </div>
           <button className="bg-white content-stretch flex items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[62px] shrink-0 w-[349px] cursor-pointer hover:bg-gray-100 transition-colors">
             <p className="font-['Satoshi',sans-serif] font-medium leading-[normal] not-italic relative shrink-0 text-[16px] text-black">
-              Subscribe to Newsletter
+              Đăng Ký Nhận Tin
             </p>
           </button>
         </div>
       </div>
       
       {/* Footer */}
-      <div className="absolute bg-[#f0f0f0] h-[499px] left-0 right-0 top-[3871px]" />
+     
       <div className="absolute content-stretch flex items-start justify-between left-[100px] right-[100px] top-[4011px]">
         <div className="content-stretch flex flex-col gap-[35px] items-start relative shrink-0">
           <div className="content-stretch flex flex-col gap-[25px] items-start not-italic relative shrink-0">
@@ -598,7 +598,7 @@ export default function Homepage() {
               <p className="leading-[normal]">Clothify</p>
             </div>
             <p className="font-['Satoshi',sans-serif] leading-[22px] relative shrink-0 text-[14px] text-[rgba(0,0,0,0.6)] w-[248px] whitespace-pre-wrap">
-              We have clothes that suits your style and which you're proud to wear. From women to men.
+              Chúng tôi có những bộ quần áo phù hợp với phong cách của bạn và đáng để bạn tự hào khi mặc. Từ nữ giới đến nam giới.
             </p>
           </div>
           <div className="flex gap-3 items-center" data-name="Social">
@@ -618,46 +618,46 @@ export default function Homepage() {
         </div>
         <div className="content-stretch flex flex-col gap-[26px] items-start not-italic relative shrink-0 text-[16px]">
           <p className="font-['Satoshi',sans-serif] font-medium leading-[18px] relative shrink-0 text-black tracking-[3px] uppercase">
-            Company
+            CÔNG TY
           </p>
           <div className="font-['Satoshi',sans-serif] leading-[19px] relative shrink-0 text-[rgba(0,0,0,0.6)] whitespace-nowrap cursor-pointer">
-            <p className="mb-2 hover:text-black transition-colors">About</p>
-            <p className="mb-2 hover:text-black transition-colors">Features</p>
-            <p className="mb-2 hover:text-black transition-colors">Works</p>
-            <p className="hover:text-black transition-colors">Career</p>
+            <p className="mb-2 hover:text-black transition-colors">Giới Thiệu</p>
+            <p className="mb-2 hover:text-black transition-colors">Tính Năng</p>
+            <p className="mb-2 hover:text-black transition-colors">Dự Án</p>
+            <p className="hover:text-black transition-colors">Tuyển Dụng</p>
           </div>
         </div>
         <div className="content-stretch flex flex-col gap-[26px] items-start not-italic relative shrink-0 text-[16px]">
           <p className="font-['Satoshi',sans-serif] font-medium leading-[18px] relative shrink-0 text-black tracking-[3px] uppercase">
-            Help
+            HỖ TRỢ
           </p>
           <div className="font-['Satoshi',sans-serif] leading-[19px] relative shrink-0 text-[rgba(0,0,0,0.6)] whitespace-nowrap cursor-pointer">
-            <p className="mb-2 hover:text-black transition-colors">Customer Support</p>
-            <p className="mb-2 hover:text-black transition-colors">Delivery Details</p>
-            <p className="mb-2 hover:text-black transition-colors">Terms & Conditions</p>
-            <p className="hover:text-black transition-colors">Privacy Policy</p>
+            <p className="mb-2 hover:text-black transition-colors">Hỗ Trợ Khách Hàng</p>
+            <p className="mb-2 hover:text-black transition-colors">Chi Tiết Giao Hàng</p>
+            <p className="mb-2 hover:text-black transition-colors">Điều Khoản & Điều Kiện</p>
+            <p className="hover:text-black transition-colors">Chính Sách Bảo Mật</p>
           </div>
         </div>
         <div className="content-stretch flex flex-col gap-[26px] items-start not-italic relative shrink-0 text-[16px]">
           <p className="font-['Satoshi',sans-serif] font-medium leading-[18px] relative shrink-0 text-black tracking-[3px] uppercase">
-            FAQ
+            CÂU HỮI
           </p>
           <div className="font-['Satoshi',sans-serif] leading-[19px] relative shrink-0 text-[rgba(0,0,0,0.6)] w-[149px] whitespace-pre-wrap cursor-pointer">
-            <p className="mb-2 hover:text-black transition-colors">Account</p>
-            <p className="mb-2 hover:text-black transition-colors">Manage Deliveries</p>
-            <p className="mb-2 hover:text-black transition-colors">Orders</p>
-            <p className="hover:text-black transition-colors">Payments</p>
+            <p className="mb-2 hover:text-black transition-colors">Tài Khoản</p>
+            <p className="mb-2 hover:text-black transition-colors">Quản Lý Giao Hàng</p>
+            <p className="mb-2 hover:text-black transition-colors">Đơn Hàng</p>
+            <p className="hover:text-black transition-colors">Thanh Toán</p>
           </div>
         </div>
         <div className="content-stretch flex flex-col gap-[26px] items-start not-italic relative shrink-0 text-[16px]">
           <p className="font-['Satoshi',sans-serif] font-medium leading-[18px] relative shrink-0 text-black tracking-[3px] uppercase">
-            Resources
+            TÀI NGUYÊN
           </p>
           <div className="font-['Satoshi',sans-serif] leading-[19px] relative shrink-0 text-[rgba(0,0,0,0.6)] whitespace-nowrap cursor-pointer">
-            <p className="mb-2 hover:text-black transition-colors">Free eBooks</p>
-            <p className="mb-2 hover:text-black transition-colors">Development Tutorial</p>
-            <p className="mb-2 hover:text-black transition-colors">How to - Blog</p>
-            <p className="hover:text-black transition-colors">Youtube Playlist</p>
+            <p className="mb-2 hover:text-black transition-colors">Sách Điện Tử Miễn Phí</p>
+            <p className="mb-2 hover:text-black transition-colors">Hướng Dẫn Lập Trình</p>
+            <p className="mb-2 hover:text-black transition-colors">Blog Hướng Dẫn</p>
+            <p className="hover:text-black transition-colors">Danh Sách Youtube</p>
           </div>
         </div>
       </div>
@@ -700,7 +700,7 @@ export default function Homepage() {
       
       {/* Copyright */}
       <p className="absolute font-['Satoshi',sans-serif] leading-[normal] left-[100px] not-italic text-[14px] text-[rgba(0,0,0,0.6)] text-left top-[4263px]">
-        Clothify © 2000-2023, All Rights Reserved
+        Clothify © 2000-2023, Bảo Lưu Mọi Quyền
       </p>
     </div>
   );
