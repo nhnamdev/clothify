@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 const imgRectangle2 = "https://www.figma.com/api/mcp/asset/3684a1b3-dd09-426f-bb37-5b246b37374b";
 const imgImage7 = "https://www.figma.com/api/mcp/asset/8a58f8e2-6c87-4daf-9f83-d1fab4392b3d";
 const imgImage8 = "https://www.figma.com/api/mcp/asset/0ca290f4-497b-4ed1-979c-682840d4147d";
@@ -48,28 +50,36 @@ const imgBadge3 = "https://www.figma.com/api/mcp/asset/6c69de0e-30c4-4023-a9d3-7
 const imgBadge4 = "https://www.figma.com/api/mcp/asset/afe577dd-b46f-411e-87ec-3176031932c6";
 
 export default function Homepage() {
+  const [showBanner, setShowBanner] = useState(true);
+
   return (
     <div className="bg-white relative w-full min-h-screen overflow-x-hidden" data-name="Homepage">
-      {/* Hero Background */}
-      <div className="absolute h-[663px] left-0 top-[134px] w-full">
+      {/* Top Banner */}
+      {showBanner && (
+        <div className="absolute bg-black h-[38px] left-0 overflow-clip top-0 w-full z-50">
+          <p className="absolute font-['Satoshi',sans-serif] font-normal leading-[0] left-[calc(50%-200px)] text-[14px] text-white top-[calc(50%-10px)]">
+            <span className="leading-[normal]">{`Đăng ký và nhận giảm giá 20% cho đơn hàng đầu tiên. `}</span>
+            <span className="[text-decoration-skip-ink:none] decoration-solid leading-[normal] underline cursor-pointer">Đăng Ký Ngay</span>
+          </p>
+          <div 
+            className="-translate-y-1/2 absolute right-[100px] size-[20px] top-1/2 cursor-pointer" 
+            onClick={() => setShowBanner(false)}
+            data-name="Frame"
+          >
+            <img alt="close" className="block max-w-none size-full" src={imgFrame} />
+          </div>
+        </div>
+      )}
+      
+      {/* Main Content */}
+      <div className={`w-full transition-transform duration-300 ${showBanner ? '' : '-translate-y-[38px]'}`}>
+        {/* Hero Background */}
+        <div className="absolute h-[663px] left-0 top-[134px] w-full">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
           <div className="absolute bg-[#f2f0f1] inset-0" />
           <div className="absolute inset-0 overflow-hidden">
             <img alt="" className="absolute h-[152.05%] left-[49.58%] max-w-none top-[-6.95%] w-[46.66%]" src={imgRectangle2} />
           </div>
-        </div>
-      </div>
-      
-     
-      
-      {/* Top Banner */}
-      <div className="absolute bg-black h-[38px] left-0 overflow-clip top-0 w-full">
-        <p className="absolute font-['Satoshi',sans-serif] font-normal leading-[0] left-[calc(50%-200px)] text-[14px] text-white top-[calc(50%-10px)]">
-          <span className="leading-[normal]">{`Đăng ký và nhận giảm giá 20% cho đơn hàng đầu tiên. `}</span>
-          <span className="[text-decoration-skip-ink:none] decoration-solid leading-[normal] underline cursor-pointer">Đăng Ký Ngay</span>
-        </p>
-        <div className="-translate-y-1/2 absolute right-[100px] size-[20px] top-1/2 cursor-pointer" data-name="Frame">
-          <img alt="close" className="block max-w-none size-full" src={imgFrame} />
         </div>
       </div>
       
@@ -184,9 +194,7 @@ export default function Homepage() {
       
       {/* Brand Bar */}
       <div className="absolute bg-black h-[122px] left-0 top-[797px] w-full" />
-      <div className="absolute inset-[19.24%_81.49%_80%_6.94%]" data-name="Group">
-        <img alt="Versace" className="block max-w-none size-full" src={imgGroup} />
-      </div>
+      
       <div className="absolute h-[38px] left-[calc(16.67%+132.48px)] top-[839px] w-[91px]" data-name="zara-logo-1 1">
         <img alt="Zara" className="block max-w-none size-full" src={imgZaraLogo11} />
       </div>
@@ -246,7 +254,7 @@ export default function Homepage() {
       </div>
       <div className="absolute content-stretch flex items-center left-[100px] top-[1480px]">
         <div className="flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[24px] text-black whitespace-nowrap">
-          <p className="leading-[normal]">$120</p>
+          <p className="leading-[normal]">3.000.000₫</p>
         </div>
       </div>
       
@@ -264,10 +272,10 @@ export default function Homepage() {
       </div>
       <div className="absolute content-stretch flex gap-[10px] items-center left-[calc(25%+55px)] top-[1480px]">
         <div className="flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[24px] text-black whitespace-nowrap">
-          <p className="leading-[normal]">$240</p>
+          <p className="leading-[normal]">6.000.000₫</p>
         </div>
         <div className="flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[24px] text-[rgba(0,0,0,0.4)] whitespace-nowrap">
-          <p className="[text-decoration-skip-ink:none] decoration-solid leading-[normal] line-through">$260</p>
+          <p className="[text-decoration-skip-ink:none] decoration-solid leading-[normal] line-through">6.500.000₫</p>
         </div>
         <div className="bg-[rgba(255,51,51,0.1)] content-stretch flex items-center justify-center overflow-clip px-[14px] py-[6px] relative rounded-[62px] shrink-0 w-[58px]">
           <p className="font-['Satoshi',sans-serif] font-medium leading-[normal] not-italic relative shrink-0 text-[#f33] text-[12px]">
@@ -289,7 +297,7 @@ export default function Homepage() {
         </p>
       </div>
       <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[calc(50%+10px)] not-italic text-[24px] text-black top-[1496px] whitespace-nowrap">
-        <p className="leading-[normal]">$180</p>
+        <p className="leading-[normal]">4.500.000₫</p>
       </div>
       
       <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[calc(75%-35px)] not-italic text-[20px] text-black top-[1431.5px] whitespace-nowrap">
@@ -306,10 +314,10 @@ export default function Homepage() {
       </div>
       <div className="absolute content-stretch flex gap-[10px] items-center left-[calc(75%-35px)] top-[1480px]">
         <div className="flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[24px] text-black whitespace-nowrap">
-          <p className="leading-[normal]">$130</p>
+          <p className="leading-[normal]">3.250.000₫</p>
         </div>
         <div className="flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[24px] text-[rgba(0,0,0,0.4)] whitespace-nowrap">
-          <p className="[text-decoration-skip-ink:none] decoration-solid leading-[normal] line-through">$160</p>
+          <p className="[text-decoration-skip-ink:none] decoration-solid leading-[normal] line-through">4.000.000₫</p>
         </div>
         <div className="bg-[rgba(255,51,51,0.1)] content-stretch flex items-center justify-center overflow-clip px-[14px] py-[6px] relative rounded-[62px] shrink-0 w-[58px]">
           <p className="font-['Satoshi',sans-serif] font-medium leading-[normal] not-italic relative shrink-0 text-[#f33] text-[12px]">
@@ -373,10 +381,10 @@ export default function Homepage() {
         </p>
       </div>
       <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[100px] not-italic text-[24px] text-black top-[2233px] whitespace-nowrap">
-        <p className="leading-[normal]">$212</p>
+        <p className="leading-[normal]">5.300.000₫</p>
       </div>
       <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[163px] not-italic text-[24px] text-[rgba(0,0,0,0.4)] top-[2233px] whitespace-nowrap">
-        <p className="[text-decoration-skip-ink:none] decoration-solid leading-[normal] line-through">$232</p>
+        <p className="[text-decoration-skip-ink:none] decoration-solid leading-[normal] line-through">5.800.000₫</p>
       </div>
       <div className="absolute bg-[rgba(255,51,51,0.1)] content-stretch flex items-center justify-center left-[calc(8.33%+111px)] overflow-clip px-[14px] py-[6px] rounded-[62px] top-[2219px] w-[58px]">
         <p className="font-['Satoshi',sans-serif] font-medium leading-[normal] not-italic relative shrink-0 text-[#f33] text-[12px]">
@@ -397,7 +405,7 @@ export default function Homepage() {
         </p>
       </div>
       <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[calc(25%+55px)] not-italic text-[24px] text-black top-[2233px] whitespace-nowrap">
-        <p className="leading-[normal]">$145</p>
+        <p className="leading-[normal]">3.625.000₫</p>
       </div>
       
       <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[calc(50%+10px)] not-italic text-[20px] text-black top-[2168.5px] whitespace-nowrap">
@@ -413,7 +421,7 @@ export default function Homepage() {
         </p>
       </div>
       <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[calc(50%+10px)] not-italic text-[24px] text-black top-[2233px] whitespace-nowrap">
-        <p className="leading-[normal]">$80</p>
+        <p className="leading-[normal]">2.000.000₫</p>
       </div>
       
       <div className="-translate-y-1/2 absolute flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] left-[calc(75%-35px)] not-italic text-[20px] text-black top-[2168.5px] whitespace-nowrap">
@@ -430,7 +438,7 @@ export default function Homepage() {
       </div>
       <div className="absolute content-stretch flex items-center left-[calc(75%-35px)] top-[2217px]">
         <div className="flex flex-col font-['Satoshi',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[24px] text-black whitespace-nowrap">
-          <p className="leading-[normal]">$210</p>
+          <p className="leading-[normal]">5.250.000₫</p>
         </div>
       </div>
       
@@ -702,6 +710,7 @@ export default function Homepage() {
       <p className="absolute font-['Satoshi',sans-serif] leading-[normal] left-[100px] not-italic text-[14px] text-[rgba(0,0,0,0.6)] text-left top-[4263px]">
         Clothify © 2000-2023, Bảo Lưu Mọi Quyền
       </p>
+      </div>
     </div>
   );
 }
