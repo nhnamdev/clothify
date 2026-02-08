@@ -53,6 +53,7 @@ const imgBadge4 = "https://www.figma.com/api/mcp/asset/afe577dd-b46f-411e-87ec-3
 export default function Homepage() {
   const navigate = useNavigate();
   const [showBanner, setShowBanner] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
 
   return (
     <div className="bg-white relative w-full min-h-screen overflow-x-hidden" data-name="Homepage">
@@ -61,7 +62,12 @@ export default function Homepage() {
         <div className="absolute bg-black h-[38px] left-0 overflow-clip top-0 w-full z-50">
           <p className="absolute font-['Satoshi',sans-serif] font-normal leading-[0] left-[calc(50%-200px)] text-[14px] text-white top-[calc(50%-10px)]">
             <span className="leading-[normal]">{`Đăng ký và nhận giảm giá 20% cho đơn hàng đầu tiên. `}</span>
-            <span className="[text-decoration-skip-ink:none] decoration-solid leading-[normal] underline cursor-pointer">Đăng Ký Ngay</span>
+            <span 
+              className="[text-decoration-skip-ink:none] decoration-solid leading-[normal] underline cursor-pointer"
+              onClick={() => navigate('/register')}
+            >
+              Đăng Ký Ngay
+            </span>
           </p>
           <div 
             className="-translate-y-1/2 absolute right-[100px] size-[20px] top-1/2 cursor-pointer" 
@@ -109,19 +115,31 @@ export default function Homepage() {
             Thương Hiệu
           </p>
         </div>
-        <div className="bg-[#f0f0f0] content-stretch flex flex-[1_0_0] gap-[12px] items-start min-h-px min-w-px overflow-clip px-[16px] py-[12px] relative rounded-[62px]">
+        <div className="bg-[#f0f0f0] content-stretch flex flex-[1_0_0] gap-[12px] items-center min-h-px min-w-px overflow-clip px-[16px] py-[12px] relative rounded-[62px]">
           <div className="relative shrink-0 size-[24px]" data-name="Frame">
             <img alt="" className="block max-w-none size-full" src={imgFrame2} />
           </div>
-          <p className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-[rgba(0,0,0,0.4)]">
-            Tìm kiếm sản phẩm...
-          </p>
+          <input
+            type="text"
+            placeholder="Tìm kiếm sản phẩm..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="font-['Satoshi',sans-serif] bg-transparent leading-[normal] text-[16px] text-black placeholder:text-[rgba(0,0,0,0.4)] flex-1 outline-none"
+          />
         </div>
         <div className="content-stretch flex gap-[14px] items-start relative shrink-0">
-          <div className="relative shrink-0 size-[24px] cursor-pointer" data-name="Frame">
+          <div 
+            className="relative shrink-0 size-[24px] cursor-pointer" 
+            data-name="Frame"
+            onClick={() => navigate('/cart')}
+          >
             <img alt="cart" className="block max-w-none size-full" src={imgFrame3} />
           </div>
-          <div className="relative shrink-0 size-[24px] cursor-pointer" data-name="Frame">
+          <div 
+            className="relative shrink-0 size-[24px] cursor-pointer" 
+            data-name="Frame"
+            onClick={() => navigate('/login')}
+          >
             <img alt="user" className="block max-w-none size-full" src={imgFrame4} />
           </div>
         </div>
