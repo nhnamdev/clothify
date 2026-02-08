@@ -1,0 +1,34 @@
+package com.clothify.repository;
+
+import com.clothify.entity.Order;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+@Repository
+public interface OrderRepository extends JpaRepository<Order, UUID> {
+
+    Optional<Order> findByOrderNumber(String orderNumber);
+
+    Page<Order> findByUserId(UUID userId, Pageable pageable);
+
+    List<Order> findByUserIdOrderByCreatedAtDesc(UUID userId);
+
+    Page<Order> findByUserIdAndStatus(UUID userId, Order.OrderStatus status, Pageable pageable);
+
+    @Query("SELECT o FROM Order o WHERE o.createdAt BETWEEN :startDate AND :endDate")
+    List<Order> findByDateRange(@Param("startDate") LocalDateTime startDate,
+            @Param("endDate") LocalDateTime endDate);
+
+    @Query("SELECT COUNT(o) FROM Order o WHERE o.user.id = :userId AND o.status = :status")
+    Long countByUserIdAndStatus(@Param("userId") UUID userId,
+            @Param("status") Order.OrderStatus status);
+}
