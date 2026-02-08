@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const imgRectangle2 = "https://www.figma.com/api/mcp/asset/3684a1b3-dd09-426f-bb37-5b246b37374b";
 const imgImage7 = "https://www.figma.com/api/mcp/asset/8a58f8e2-6c87-4daf-9f83-d1fab4392b3d";
@@ -50,6 +51,7 @@ const imgBadge3 = "https://www.figma.com/api/mcp/asset/6c69de0e-30c4-4023-a9d3-7
 const imgBadge4 = "https://www.figma.com/api/mcp/asset/afe577dd-b46f-411e-87ec-3176031932c6";
 
 export default function Homepage() {
+  const navigate = useNavigate();
   const [showBanner, setShowBanner] = useState(true);
 
   return (
@@ -218,22 +220,22 @@ export default function Homepage() {
       </div>
       
       {/* New Arrivals Products */}
-      <div className="absolute bg-[#f0eeed] h-[298px] left-[100px] overflow-clip rounded-[20px] top-[1104px] w-[295px]">
+      <div className="absolute bg-[#f0eeed] h-[298px] left-[100px] overflow-clip rounded-[20px] top-[1104px] w-[295px] cursor-pointer" onClick={() => navigate('/product/1')}>
         <div className="absolute h-[444px] left-[-1px] top-[-73px] w-[296px]" data-name="image 7">
           <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage7} />
         </div>
       </div>
-      <div className="absolute bg-[#f0eeed] h-[298px] left-[calc(25%+55px)] overflow-clip rounded-[20px] top-[1104px] w-[295px]">
+      <div className="absolute bg-[#f0eeed] h-[298px] left-[calc(25%+55px)] overflow-clip rounded-[20px] top-[1104px] w-[295px] cursor-pointer" onClick={() => navigate('/product/2')}>
         <div className="absolute h-[402px] left-[14px] top-[-51px] w-[268px]" data-name="image 8">
           <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage8} />
         </div>
       </div>
-      <div className="absolute bg-[#f0eeed] h-[298px] left-[calc(50%+10px)] overflow-clip rounded-[20px] top-[1104px] w-[295px]">
+      <div className="absolute bg-[#f0eeed] h-[298px] left-[calc(50%+10px)] overflow-clip rounded-[20px] top-[1104px] w-[295px] cursor-pointer" onClick={() => navigate('/product/3')}>
         <div className="absolute h-[444px] left-0 top-[-73px] w-[296px]" data-name="image 9">
           <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage9} />
         </div>
       </div>
-      <div className="absolute bg-[#f0eeed] h-[298px] left-[calc(75%-35px)] overflow-clip rounded-[20px] top-[1104px] w-[295px]">
+      <div className="absolute bg-[#f0eeed] h-[298px] left-[calc(75%-35px)] overflow-clip rounded-[20px] top-[1104px] w-[295px] cursor-pointer" onClick={() => navigate('/product/4')}>
         <div className="absolute h-[444px] left-0 top-[-73px] w-[296px]" data-name="image 10">
           <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage10} />
         </div>
