@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 
 // Image assets from Figma
 const imgImage8 = "https://www.figma.com/api/mcp/asset/70737498-784f-4455-82d1-79082a9810d2";
@@ -40,24 +41,24 @@ const imgFrame78 = "https://www.figma.com/api/mcp/asset/55c259f9-d501-420d-b794-
 export default function Category() {
   const navigate = useNavigate();
   const [showBanner, setShowBanner] = useState(true);
-  const [selectedSize, setSelectedSize] = useState('Large');
+  const [selectedSize, setSelectedSize] = useState('L');
   const [priceRange, setPriceRange] = useState([50, 200]);
 
   const products = [
-    { id: 1, name: 'Gradient Graphic T-shirt', price: 145, image: imgImage8, rating: 3.5 },
-    { id: 2, name: 'Polo with Tipping Details', price: 180, image: imgImage9, rating: 4.5 },
-    { id: 3, name: 'Black Striped T-shirt', price: 120, oldPrice: 150, discount: 30, image: imgImage10, rating: 5.0 },
-    { id: 4, name: 'SKINNY FIT JEANS', price: 240, oldPrice: 260, discount: 20, image: imgImage11, rating: 3.5 },
-    { id: 5, name: 'CHECKERED SHIRT', price: 180, image: imgImage12, rating: 4.5 },
-    { id: 6, name: 'SLEEVE STRIPED T-SHIRT', price: 130, oldPrice: 160, discount: 30, image: imgImage13, rating: 4.5 },
-    { id: 7, name: 'VERTICAL STRIPED SHIRT', price: 212, oldPrice: 232, discount: 20, image: imgImage7, rating: 5.0 },
-    { id: 8, name: 'COURAGE GRAPHIC T-SHIRT', price: 145, image: imgImage14, rating: 4.0 },
-    { id: 9, name: 'LOOSE FIT BERMUDA SHORTS', price: 80, image: imgImage15, rating: 3.0 },
+    { id: 1, name: 'Áo Thun Họa Tiết Chuyển Màu', price: 145000, image: imgImage8, rating: 3.5 },
+    { id: 2, name: 'Áo Polo Chi Tiết Tipping', price: 180000, image: imgImage9, rating: 4.5 },
+    { id: 3, name: 'Áo Thun Sọc Đen', price: 120000, oldPrice: 150000, discount: 30, image: imgImage10, rating: 5.0 },
+    { id: 4, name: 'Quần Jeans Skinny Fit', price: 240000, oldPrice: 260000, discount: 20, image: imgImage11, rating: 3.5 },
+    { id: 5, name: 'Áo Sơ Mi Kẻ Caro', price: 180000, image: imgImage12, rating: 4.5 },
+    { id: 6, name: 'Áo Thun Sọc Tay Áo', price: 130000, oldPrice: 160000, discount: 30, image: imgImage13, rating: 4.5 },
+    { id: 7, name: 'Áo Sơ Mi Sọc Dọc', price: 212000, oldPrice: 232000, discount: 20, image: imgImage7, rating: 5.0 },
+    { id: 8, name: 'Áo Thun Họa Tiết Dũng Cảm', price: 145000, image: imgImage14, rating: 4.0 },
+    { id: 9, name: 'Quần Short Bermuda Rộng', price: 80000, image: imgImage15, rating: 3.0 },
   ];
 
-  const sizes = ['XX-Small', 'X-Small', 'Small', 'Medium', 'Large', 'X-Large', 'XX-Large', '3X-Large', '4X-Large'];
-  const categories = ['T-shirts', 'Shorts', 'Shirts', 'Hoodie', 'Jeans'];
-  const dressStyles = ['Casual', 'Formal', 'Party', 'Gym'];
+  const sizes = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL'];
+  const categories = ['Áo Thun', 'Quần Short', 'Áo Sơ Mi', 'Áo Hoodie', 'Quần Jeans'];
+  const dressStyles = ['Thường Ngày', 'Lịch Sự', 'Tiệc Tụng', 'Thể Thao'];
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
@@ -80,103 +81,31 @@ export default function Category() {
 
   return (
     <div className="bg-white relative w-full min-h-screen" data-name="Category Page">
-      {/* Top Banner */}
-      {showBanner && (
-        <div className="bg-black h-[38px] w-full overflow-clip relative z-50">
-          <p className="absolute font-['Satoshi',sans-serif] leading-[0] left-[calc(50%-176px)] text-[14px] text-white top-[calc(50%-10px)]">
-            <span className="font-normal leading-[normal]">{`Đăng ký và nhận giảm giá 20% cho đơn hàng đầu tiên. `}</span>
-            <span className="[text-decoration-skip-ink:none] decoration-solid leading-[normal] underline cursor-pointer">Đăng Ký Ngay</span>
-          </p>
-          <div 
-            className="-translate-y-1/2 absolute right-[100px] size-[20px] top-1/2 cursor-pointer" 
-            onClick={() => setShowBanner(false)}
-          >
-            <img alt="close" className="block max-w-none size-full" src={imgFrame} />
-          </div>
-        </div>
-      )}
+      <Header />
 
-      {/* Header */}
-      <div className={`w-full ${showBanner ? 'pt-[38px]' : ''}`}>
-        <div className="content-stretch flex gap-[40px] items-center justify-center px-[100px] py-[24px]">
-          <div 
-            className="flex flex-col font-['Integral_CF',sans-serif] font-bold justify-center leading-[0] text-[32px] text-black whitespace-nowrap cursor-pointer"
-            onClick={() => navigate('/')}
-          >
-            <p className="leading-[normal]">Clothify</p>
-          </div>
-          <div className="content-stretch flex gap-[24px] items-center">
-            <div className="content-stretch flex gap-[4px] items-center cursor-pointer">
-              <p className="font-['Satoshi',sans-serif] leading-[normal] text-[16px] text-black">
-                Cửa Hàng
-              </p>
-              <div className="size-[16px]">
-                <img alt="" className="block max-w-none size-full" src={imgFrame1} />
-              </div>
-            </div>
-            <p className="font-['Satoshi',sans-serif] leading-[normal] text-[16px] text-black cursor-pointer">
-              Giảm Giá
+      {/* Breadcrumb & Category Title */}
+      <div className="px-[100px] py-[24px] pt-[158px]">
+        <div className="flex gap-[12px] items-center mb-[20px]">
+          <div className="flex gap-[4px] items-center cursor-pointer" onClick={() => navigate('/')}>
+            <p className="font-['Satoshi',sans-serif] leading-[normal] text-[16px] text-[rgba(0,0,0,0.6)]">
+              Trang Chủ
             </p>
-            <p className="font-['Satoshi',sans-serif] leading-[normal] text-[16px] text-black cursor-pointer">
-              Hàng Mới
-            </p>
-            <p className="font-['Satoshi',sans-serif] leading-[normal] text-[16px] text-black cursor-pointer">
-              Thương Hiệu
-            </p>
-          </div>
-          <div className="bg-[#f0f0f0] content-stretch flex flex-[1_0_0] gap-[12px] items-start px-[16px] py-[12px] rounded-[62px]">
-            <div className="size-[24px]">
-              <img alt="" className="block max-w-none size-full" src={imgFrame2} />
-            </div>
-            <input
-              type="text"
-              placeholder="Tìm kiếm sản phẩm..."
-              className="font-['Satoshi',sans-serif] bg-transparent leading-[normal] text-[16px] text-black placeholder:text-[rgba(0,0,0,0.4)] flex-1 outline-none"
-            />
-          </div>
-          <div className="content-stretch flex gap-[14px] items-start">
-            <div className="size-[24px] cursor-pointer">
-              <img alt="" className="block max-w-none size-full" src={imgFrame3} />
-            </div>
-            <div 
-              className="size-[24px] cursor-pointer"
-              onClick={() => navigate('/cart')}
-            >
-              <img alt="" className="block max-w-none size-full" src={imgFrame4} />
-            </div>
-          </div>
-        </div>
-
-        {/* Divider */}
-        <div className="h-0 w-full px-[100px]">
-          <div className="h-[1px] w-full">
-            <img alt="" className="block max-w-none w-full h-full" src={imgLine4} />
-          </div>
-        </div>
-
-        {/* Breadcrumb & Category Title */}
-        <div className="px-[100px] py-[24px]">
-          <div className="flex gap-[12px] items-center mb-[20px]">
-            <div className="flex gap-[4px] items-center cursor-pointer" onClick={() => navigate('/')}>
-              <p className="font-['Satoshi',sans-serif] leading-[normal] text-[16px] text-[rgba(0,0,0,0.6)]">
-                Trang Chủ
-              </p>
-              <div className="flex items-center justify-center size-[16px]">
-                <div className="-rotate-90">
-                  <div className="size-[16px]">
-                    <img alt="" className="block max-w-none size-full" src={imgFrame5} />
-                  </div>
+            <div className="flex items-center justify-center size-[16px]">
+              <div className="-rotate-90">
+                <div className="size-[16px]">
+                  <img alt="" className="block max-w-none size-full" src={imgFrame5} />
                 </div>
               </div>
             </div>
-            <p className="font-['Satoshi',sans-serif] leading-[normal] text-[16px] text-black">
-              Thời Trang Thường Ngày
-            </p>
           </div>
+          <p className="font-['Satoshi',sans-serif] leading-[normal] text-[16px] text-black">
+            Thời Trang Thường Ngày
+          </p>
         </div>
+      </div>
 
-        {/* Main Content */}
-        <div className="flex gap-[20px] px-[100px] pb-[50px]">
+      {/* Main Content */}
+      <div className="flex gap-[20px] px-[100px] pb-[50px]">
           {/* Filter Sidebar */}
           <div className="border border-[rgba(0,0,0,0.1)] border-solid flex flex-col gap-[24px] h-fit px-[24px] py-[20px] rounded-[20px] w-[295px] sticky top-[20px]">
             <div className="flex items-center justify-between w-full">
@@ -234,10 +163,10 @@ export default function Category() {
                 </div>
                 <div className="flex justify-between mt-[4px]">
                   <p className="font-['Satoshi',sans-serif] font-medium text-[14px] text-black">
-                    ${priceRange[0]}
+                    {priceRange[0]}K
                   </p>
                   <p className="font-['Satoshi',sans-serif] font-medium text-[14px] text-black">
-                    ${priceRange[1]}
+                    {priceRange[1]}K
                   </p>
                 </div>
               </div>
@@ -392,12 +321,12 @@ export default function Category() {
                   </div>
                   <div className="flex items-center gap-[10px]">
                     <p className="font-['Satoshi',sans-serif] font-bold text-[24px] text-black">
-                      ${product.price}
+                      {product.price.toLocaleString('vi-VN')}₫
                     </p>
                     {product.oldPrice && (
                       <>
                         <p className="font-['Satoshi',sans-serif] font-bold text-[24px] text-[rgba(0,0,0,0.4)] line-through">
-                          ${product.oldPrice}
+                          {product.oldPrice.toLocaleString('vi-VN')}₫
                         </p>
                         <div className="bg-[rgba(255,51,51,0.1)] px-[14px] py-[6px] rounded-[62px]">
                           <p className="font-['Satoshi',sans-serif] font-medium text-[12px] text-[#f33]">
@@ -553,6 +482,6 @@ export default function Category() {
           </div>
         </div>
       </div>
-    </div>
+    
   );
 }

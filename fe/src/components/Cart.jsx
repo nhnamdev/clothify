@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 
 // Image assets from Figma
 const imgImage8 = "https://www.figma.com/api/mcp/asset/0338fd14-294f-4b94-bc1f-5330b76266c1";
@@ -87,80 +88,10 @@ export default function Cart() {
 
   return (
     <div className="bg-white relative w-full min-h-screen" data-name="Cart">
-      {/* Top Banner */}
-      {showBanner && (
-        <div className="bg-black h-[38px] w-full overflow-clip relative z-50">
-          <p className="absolute font-['Satoshi',sans-serif] leading-[0] left-[calc(50%-176px)] text-[14px] text-white top-[calc(50%-10px)]">
-            <span className="font-normal leading-[normal]">{`Đăng ký và nhận giảm giá 20% cho đơn hàng đầu tiên. `}</span>
-            <span className="[text-decoration-skip-ink:none] decoration-solid leading-[normal] underline cursor-pointer">Đăng Ký Ngay</span>
-          </p>
-          <div 
-            className="-translate-y-1/2 absolute right-[100px] size-[20px] top-1/2 cursor-pointer" 
-            onClick={() => setShowBanner(false)}
-          >
-            <img alt="close" className="block max-w-none size-full" src={imgFrame} />
-          </div>
-        </div>
-      )}
+      <Header />
 
-      {/* Header */}
-      <div className={`w-full ${showBanner ? 'pt-[38px]' : ''}`}>
-        <div className="content-stretch flex gap-[40px] items-center justify-center px-[100px] py-[24px]">
-          <div 
-            className="flex flex-col font-['Integral_CF',sans-serif] font-bold justify-center leading-[0] text-[32px] text-black whitespace-nowrap cursor-pointer"
-            onClick={() => navigate('/')}
-          >
-            <p className="leading-[normal]">Clothify</p>
-          </div>
-          <div className="content-stretch flex gap-[24px] items-center">
-            <div className="content-stretch flex gap-[4px] items-center cursor-pointer">
-              <p className="font-['Satoshi',sans-serif] leading-[normal] text-[16px] text-black">
-                Cửa Hàng
-              </p>
-              <div className="size-[16px]">
-                <img alt="" className="block max-w-none size-full" src={imgFrame1} />
-              </div>
-            </div>
-            <p className="font-['Satoshi',sans-serif] leading-[normal] text-[16px] text-black cursor-pointer">
-              Giảm Giá
-            </p>
-            <p className="font-['Satoshi',sans-serif] leading-[normal] text-[16px] text-black cursor-pointer">
-              Hàng Mới
-            </p>
-            <p className="font-['Satoshi',sans-serif] leading-[normal] text-[16px] text-black cursor-pointer">
-              Thương Hiệu
-            </p>
-          </div>
-          <div className="bg-[#f0f0f0] content-stretch flex flex-[1_0_0] gap-[12px] items-start px-[16px] py-[12px] rounded-[62px]">
-            <div className="size-[24px]">
-              <img alt="" className="block max-w-none size-full" src={imgFrame2} />
-            </div>
-            <p className="font-['Satoshi',sans-serif] leading-[normal] text-[16px] text-[rgba(0,0,0,0.4)]">
-              Tìm kiếm sản phẩm...
-            </p>
-          </div>
-          <div className="content-stretch flex gap-[14px] items-start">
-            <div className="size-[24px] cursor-pointer">
-              <img alt="" className="block max-w-none size-full" src={imgFrame3} />
-            </div>
-            <div 
-              className="size-[24px] cursor-pointer"
-              onClick={() => navigate('/cart')}
-            >
-              <img alt="" className="block max-w-none size-full" src={imgFrame4} />
-            </div>
-          </div>
-        </div>
-
-        {/* Divider */}
-        <div className="h-0 w-full px-[100px]">
-          <div className="h-[1px] w-full">
-            <img alt="" className="block max-w-none w-full h-full" src={imgLine4} />
-          </div>
-        </div>
-
-        {/* Breadcrumb */}
-        <div className="content-stretch flex gap-[12px] items-center px-[100px] py-[24px]">
+      {/* Breadcrumb */}
+      <div className="content-stretch flex gap-[12px] items-center px-[100px] py-[24px] pt-[158px]">
           <div className="content-stretch flex gap-[4px] items-center cursor-pointer" onClick={() => navigate('/')}>
             <p className="font-['Satoshi',sans-serif] leading-[normal] text-[16px] text-[rgba(0,0,0,0.6)]">
               Trang Chủ
@@ -447,6 +378,6 @@ export default function Cart() {
           </div>
         </div>
       </div>
-    </div>
+   
   );
 }

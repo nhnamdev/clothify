@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 
 const imgRectangle2 = "https://www.figma.com/api/mcp/asset/3684a1b3-dd09-426f-bb37-5b246b37374b";
 const imgImage7 = "https://www.figma.com/api/mcp/asset/8a58f8e2-6c87-4daf-9f83-d1fab4392b3d";
@@ -52,95 +52,17 @@ const imgBadge4 = "https://www.figma.com/api/mcp/asset/afe577dd-b46f-411e-87ec-3
 
 export default function Homepage() {
   const navigate = useNavigate();
-  const [showBanner, setShowBanner] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
 
   return (
     <div className="bg-white relative w-full min-h-screen overflow-x-hidden" data-name="Homepage">
-      {/* Top Banner */}
-      {showBanner && (
-        <div className="absolute bg-black h-[38px] left-0 overflow-clip top-0 w-full z-50">
-          <p className="absolute font-['Satoshi',sans-serif] font-normal leading-[0] left-[calc(50%-200px)] text-[14px] text-white top-[calc(50%-10px)]">
-            <span className="leading-[normal]">{`Đăng ký và nhận giảm giá 20% cho đơn hàng đầu tiên. `}</span>
-            <span 
-              className="[text-decoration-skip-ink:none] decoration-solid leading-[normal] underline cursor-pointer"
-              onClick={() => navigate('/register')}
-            >
-              Đăng Ký Ngay
-            </span>
-          </p>
-          <div 
-            className="-translate-y-1/2 absolute right-[100px] size-[20px] top-1/2 cursor-pointer" 
-            onClick={() => setShowBanner(false)}
-            data-name="Frame"
-          >
-            <img alt="close" className="block max-w-none size-full" src={imgFrame} />
-          </div>
-        </div>
-      )}
+      <Header />
       
-      {/* Main Content */}
-      <div className={`w-full transition-transform duration-300 ${showBanner ? '' : '-translate-y-[38px]'}`}>
-        {/* Hero Background */}
-        <div className="absolute h-[663px] left-0 top-[134px] w-full">
+      {/* Hero Background */}
+      <div className="absolute h-[663px] left-0 top-[134px] w-full">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
           <div className="absolute bg-[#f2f0f1] inset-0" />
           <div className="absolute inset-0 overflow-hidden">
             <img alt="" className="absolute h-[152.05%] left-[49.58%] max-w-none top-[-6.95%] w-[46.66%]" src={imgRectangle2} />
-          </div>
-        </div>
-      </div>
-      
-      {/* Header/Navigation */}
-      <div className="absolute content-stretch flex gap-[40px] items-center justify-center left-0 right-0 mx-[100px] top-[62px]">
-        <div className="flex flex-col font-['Integral_CF',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap">
-          <p className="leading-[normal]">Clothify</p>
-        </div>
-        <div className="content-stretch flex gap-[24px] items-center relative shrink-0">
-          <div className="content-stretch flex gap-[4px] items-center relative shrink-0 cursor-pointer">
-            <p className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-black">
-              Cửa Hàng
-            </p>
-            <div className="relative shrink-0 size-[16px]" data-name="Frame">
-              <img alt="" className="block max-w-none size-full" src={imgFrame1} />
-            </div>
-          </div>
-          <p className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-black cursor-pointer">
-            Khuyến Mãi
-          </p>
-          <p className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-black cursor-pointer">
-            Hàng Mới Về
-          </p>
-          <p className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-black cursor-pointer">
-            Thương Hiệu
-          </p>
-        </div>
-        <div className="bg-[#f0f0f0] content-stretch flex flex-[1_0_0] gap-[12px] items-center min-h-px min-w-px overflow-clip px-[16px] py-[12px] relative rounded-[62px]">
-          <div className="relative shrink-0 size-[24px]" data-name="Frame">
-            <img alt="" className="block max-w-none size-full" src={imgFrame2} />
-          </div>
-          <input
-            type="text"
-            placeholder="Tìm kiếm sản phẩm..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="font-['Satoshi',sans-serif] bg-transparent leading-[normal] text-[16px] text-black placeholder:text-[rgba(0,0,0,0.4)] flex-1 outline-none"
-          />
-        </div>
-        <div className="content-stretch flex gap-[14px] items-start relative shrink-0">
-          <div 
-            className="relative shrink-0 size-[24px] cursor-pointer" 
-            data-name="Frame"
-            onClick={() => navigate('/cart')}
-          >
-            <img alt="cart" className="block max-w-none size-full" src={imgFrame3} />
-          </div>
-          <div 
-            className="relative shrink-0 size-[24px] cursor-pointer" 
-            data-name="Frame"
-            onClick={() => navigate('/login')}
-          >
-            <img alt="user" className="block max-w-none size-full" src={imgFrame4} />
           </div>
         </div>
       </div>
@@ -730,7 +652,6 @@ export default function Homepage() {
       <p className="absolute font-['Satoshi',sans-serif] leading-[normal] left-[100px] not-italic text-[14px] text-[rgba(0,0,0,0.6)] text-left top-[4263px]">
         Clothify © 2000-2023, Bảo Lưu Mọi Quyền
       </p>
-      </div>
     </div>
   );
 }

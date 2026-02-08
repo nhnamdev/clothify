@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 
 const imgImage1 = "https://www.figma.com/api/mcp/asset/c9dcaf3c-410a-4907-a444-136c5e3a7c10";
 const imgImage5 = "https://www.figma.com/api/mcp/asset/380ce4c5-813d-4d69-8365-f287f2e23da6";
@@ -48,11 +49,12 @@ const imgBadge4 = "https://www.figma.com/api/mcp/asset/57100f7a-6534-49eb-9459-c
 export default function ProductDetail() {
   const navigate = useNavigate();
   const [showBanner, setShowBanner] = useState(true);
-  const [selectedSize, setSelectedSize] = useState('Large');
+  const [selectedSize, setSelectedSize] = useState('Lớn');
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [activeTab, setActiveTab] = useState('reviews'); // 'details', 'reviews', 'faq'
 
-  const sizes = ['Small', 'Medium', 'Large', 'X-Large'];
+  const sizes = ['Nhỏ', 'Vừa', 'Lớn', 'Rất Lớn'];
   const images = [imgImage1, imgImage5, imgImage6];
 
   const handleQuantityChange = (change) => {
@@ -64,74 +66,7 @@ export default function ProductDetail() {
 
   return (
     <div className="bg-white relative w-full min-h-screen overflow-x-hidden" data-name="Product Detail Page">
-      {/* Top Banner */}
-      {showBanner && (
-        <div className="absolute bg-black h-[38px] left-0 overflow-clip top-0 w-full z-50">
-          <p className="absolute font-['Satoshi',sans-serif] leading-[0] left-[calc(50%-176px)] not-italic text-[14px] text-white top-[calc(50%-10px)]">
-            <span className="font-normal leading-[normal]">{`Đăng ký và nhận giảm giá 20% cho đơn hàng đầu tiên. `}</span>
-            <span className="[text-decoration-skip-ink:none] decoration-solid leading-[normal] underline cursor-pointer">Đăng Ký Ngay</span>
-          </p>
-          <div 
-            className="-translate-y-1/2 absolute left-[1320px] size-[20px] top-1/2 cursor-pointer" 
-            onClick={() => setShowBanner(false)}
-            data-name="Frame"
-          >
-            <img alt="close" className="block max-w-none size-full" src={imgFrame} />
-          </div>
-        </div>
-      )}
-      
-      {/* Header/Navigation */}
-      <div className="absolute content-stretch flex gap-[40px] items-center justify-center left-[100px] top-[62px] w-[1240px]">
-        <div 
-          className="flex flex-col font-['Integral_CF',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap cursor-pointer"
-          onClick={() => navigate('/')}
-        >
-          <p className="leading-[normal]">Clothify</p>
-        </div>
-        <div className="content-stretch flex gap-[24px] items-center relative shrink-0">
-          <div className="content-stretch flex gap-[4px] items-center relative shrink-0 cursor-pointer">
-            <p className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-black">
-              Cửa Hàng
-            </p>
-            <div className="relative shrink-0 size-[16px]" data-name="Frame">
-              <img alt="" className="block max-w-none size-full" src={imgFrame1} />
-            </div>
-          </div>
-          <p className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-black cursor-pointer">
-            Khuyến Mãi
-          </p>
-          <p className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-black cursor-pointer">
-            Hàng Mới Về
-          </p>
-          <p className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-black cursor-pointer">
-            Thương Hiệu
-          </p>
-        </div>
-        <div className="bg-[#f0f0f0] content-stretch flex flex-[1_0_0] gap-[12px] items-start min-h-px min-w-px overflow-clip px-[16px] py-[12px] relative rounded-[62px]">
-          <div className="relative shrink-0 size-[24px]" data-name="Frame">
-            <img alt="" className="block max-w-none size-full" src={imgFrame2} />
-          </div>
-          <p className="font-['Satoshi',sans-serif] leading-[normal] not-italic relative shrink-0 text-[16px] text-[rgba(0,0,0,0.4)]">
-            Tìm kiếm sản phẩm...
-          </p>
-        </div>
-        <div className="content-stretch flex gap-[14px] items-start relative shrink-0">
-          <div className="relative shrink-0 size-[24px] cursor-pointer" data-name="Frame">
-            <img alt="cart" className="block max-w-none size-full" src={imgFrame3} />
-          </div>
-          <div className="relative shrink-0 size-[24px] cursor-pointer" data-name="Frame">
-            <img alt="user" className="block max-w-none size-full" src={imgFrame4} />
-          </div>
-        </div>
-      </div>
-
-      {/* Separator Line */}
-      <div className="absolute h-0 left-[100px] top-[134px] w-[1240px]">
-        <div className="absolute inset-[-1px_0_0_0]">
-          <img alt="" className="block max-w-none size-full" src={imgLine5} />
-        </div>
-      </div>
+      <Header />
 
       {/* Breadcrumb */}
       <div className="absolute content-stretch flex gap-[12px] items-center left-[100px] top-[158px]">
@@ -222,8 +157,8 @@ export default function ProductDetail() {
 
         {/* Price */}
         <div className="flex gap-[12px] items-center mb-[20px]">
-          <span className="font-['Satoshi',sans-serif] font-bold text-[32px] text-black">$260</span>
-          <span className="font-['Satoshi',sans-serif] font-bold text-[32px] text-[rgba(0,0,0,0.3)] line-through">$300</span>
+          <span className="font-['Satoshi',sans-serif] font-bold text-[32px] text-black">260.000₫</span>
+          <span className="font-['Satoshi',sans-serif] font-bold text-[32px] text-[rgba(0,0,0,0.3)] line-through">300.000₫</span>
           <div className="bg-[rgba(255,51,51,0.1)] px-[14px] py-[6px] rounded-[62px]">
             <span className="font-['Satoshi',sans-serif] font-medium text-[16px] text-[#f33]">-40%</span>
           </div>
@@ -263,7 +198,7 @@ export default function ProductDetail() {
                   : 'bg-[#f0f0f0] text-[rgba(0,0,0,0.6)]'
               }`}
             >
-              {size === 'Small' ? 'Nhỏ' : size === 'Medium' ? 'Vừa' : size === 'Large' ? 'Lớn' : 'Rất Lớn'}
+              {size}
             </button>
           ))}
         </div>
@@ -299,179 +234,382 @@ export default function ProductDetail() {
       <div className="absolute left-[100px] top-[826px] w-[1240px]">
         {/* Tabs */}
         <div className="relative flex justify-between mb-[14px]">
-          <p className="font-['Satoshi',sans-serif] text-[20px] text-[rgba(0,0,0,0.6)] cursor-pointer">
+          <p 
+            className={`font-['Satoshi',sans-serif] text-[20px] cursor-pointer transition-colors ${
+              activeTab === 'details' ? 'font-medium text-black' : 'text-[rgba(0,0,0,0.6)]'
+            }`}
+            onClick={() => setActiveTab('details')}
+          >
             Chi Tiết Sản Phẩm
           </p>
-          <p className="font-['Satoshi',sans-serif] font-medium text-[20px] text-black text-center cursor-pointer">
+          <p 
+            className={`font-['Satoshi',sans-serif] text-[20px] text-center cursor-pointer transition-colors ${
+              activeTab === 'reviews' ? 'font-medium text-black' : 'text-[rgba(0,0,0,0.6)]'
+            }`}
+            onClick={() => setActiveTab('reviews')}
+          >
             Đánh Giá & Nhận Xét
           </p>
-          <p className="font-['Satoshi',sans-serif] text-[20px] text-[rgba(0,0,0,0.6)] text-right cursor-pointer">
+          <p 
+            className={`font-['Satoshi',sans-serif] text-[20px] text-right cursor-pointer transition-colors ${
+              activeTab === 'faq' ? 'font-medium text-black' : 'text-[rgba(0,0,0,0.6)]'
+            }`}
+            onClick={() => setActiveTab('faq')}
+          >
             Câu Hỏi Thường Gặp
           </p>
         </div>
 
         {/* Separator */}
         <div className="relative h-0 w-full mb-[32px]">
-          
           {/* Active tab indicator */}
-          <div className="absolute h-0 left-[calc(50%-207px)] top-0 w-[414px]">
-            <img alt="" className=" h-px block w-full" src={imgLine7} />
+          <div 
+            className={`absolute h-0 top-0 w-[414px] transition-all duration-300 ${
+              activeTab === 'details' ? 'left-0' : 
+              activeTab === 'reviews' ? 'left-[calc(50%-207px)]' : 
+              'left-[calc(100%-414px)]'
+            }`}
+          >
+            <img alt="" className="h-px block w-full" src={imgLine7} />
           </div>
         </div>
 
-        {/* Reviews Header */}
-        <div className="flex items-center justify-between mb-[32px]">
-          <div className="flex items-center gap-[8px]">
-            <h2 className="font-['Satoshi',sans-serif] font-bold text-[24px] text-black">
-              Tất Cả Đánh Giá
-            </h2>
-            <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)]">
-              (451)
-            </p>
-          </div>
-          <div className="flex gap-[10px]">
-            <div className="bg-[#f0f0f0] flex h-[48px] items-center justify-between px-[20px] py-[16px] rounded-[62px] size-[48px] cursor-pointer">
-              <img alt="" className="w-[16px] h-[24px]" src={imgFrame7} />
-            </div>
-            <div className="bg-[#f0f0f0] flex h-[48px] items-center gap-[8px] px-[20px] py-[16px] rounded-[62px] w-[120px] cursor-pointer">
-              <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-black">
-                Mới Nhất
+        {/* Tab Content */}
+        {activeTab === 'details' && (
+          <div className="space-y-[24px]">
+            {/* Product Description */}
+            <div>
+              <h3 className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black mb-[16px]">
+                Mô Tả Sản Phẩm
+              </h3>
+              <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px]">
+                Áo thun họa tiết One Life là sự lựa chọn hoàn hảo cho những ai yêu thích phong cách trẻ trung, năng động. 
+                Với thiết kế độc đáo, áo không chỉ mang lại vẻ ngoài sành điệu mà còn thể hiện thông điệp ý nghĩa về cuộc sống. 
+                Chất liệu cotton cao cấp mang đến cảm giác mềm mại, thoáng mát và dễ chịu suốt cả ngày dài.
               </p>
-              <img alt="" className="size-[16px]" src={imgFrame1} />
             </div>
-            <button className="bg-black flex h-[48px] items-center px-[20px] py-[16px] rounded-[62px] w-[166px] hover:bg-gray-800 transition-colors">
-              <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-white">
-                Viết Đánh Giá
-              </p>
-            </button>
-          </div>
-        </div>
 
-        {/* Reviews Grid */}
-        <div className="grid grid-cols-2 gap-[20px] mb-[36px]">
-          {/* Review 1 */}
-          <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[32px]">
-            <div className="h-[22.579px] w-[127px] mb-[15px]">
-              <img alt="" className="block size-full" src={imgFrame15} />
+            {/* Material */}
+            <div>
+              <h3 className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black mb-[16px]">
+                Chất Liệu
+              </h3>
+              <ul className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px] space-y-[8px]">
+                <li>• 100% Cotton cao cấp</li>
+                <li>• Vải mềm mại, thấm hút mồ hôi tốt</li>
+                <li>• Độ bền cao, không bai xù sau nhiều lần giặt</li>
+                <li>• An toàn với làn da, không gây kích ứng</li>
+              </ul>
             </div>
-            <div className="flex items-center gap-[4px] mb-[12px]">
-              <p className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black">
-                Samantha D.
-              </p>
-              <img alt="" className="size-[24px]" src={imgFrame9} />
-            </div>
-            <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px] mb-[24px]">
-              "Tôi thực sự yêu thích chiếc áo này! Thiết kế độc đáo và chất liệu cực kỳ thoải mái. Là một nhà thiết kế, tôi đánh giá cao sự chú ý đến từng chi tiết. Đây đã trở thành chiếc áo yêu thích của tôi."
-            </p>
-            <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-[rgba(0,0,0,0.6)]">
-              Đăng vào 14 tháng 8, 2023
-            </p>
-          </div>
 
-          {/* Review 2 */}
-          <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[32px]">
-            <div className="h-[22.579px] w-[109.776px] mb-[15px]">
-              <img alt="" className="block size-full" src={imgFrame18} />
+            {/* Care Instructions */}
+            <div>
+              <h3 className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black mb-[16px]">
+                Hướng Dẫn Bảo Quản
+              </h3>
+              <ul className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px] space-y-[8px]">
+                <li>• Giặt máy ở nhiệt độ tối đa 30°C</li>
+                <li>• Không sử dụng chất tẩy mạnh</li>
+                <li>• Phơi ở nơi thoáng mát, tránh ánh nắng trực tiếp</li>
+                <li>• Là ở nhiệt độ thấp nếu cần thiết</li>
+                <li>• Không vắt</li>
+              </ul>
             </div>
-            <div className="flex items-center gap-[4px] mb-[12px]">
-              <p className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black">
-                Alex M.
-              </p>
-              <img alt="" className="size-[24px]" src={imgFrame9} />
-            </div>
-            <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px] mb-[24px]">
-              "Chiếc áo vượt quá mong đợi của tôi! Màu sắc rực rỡ và chất lượng in ấn hàng đầu. Là một nhà thiết kế UI/UX, tôi khá kỹ tính về tính thẩm mỹ, và chiếc áo này chắc chắn được tôi đánh giá cao."
-            </p>
-            <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-[rgba(0,0,0,0.6)]">
-              Đăng vào 15 tháng 8, 2023
-            </p>
-          </div>
 
-          {/* Review 3 */}
-          <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[32px]">
-            <div className="h-[22.579px] w-[97.934px] mb-[15px]">
-              <img alt="" className="block size-full" src={imgFrame17} />
+            {/* Size Guide */}
+            <div>
+              <h3 className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black mb-[16px]">
+                Bảng Kích Thước
+              </h3>
+              <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] overflow-hidden">
+                <table className="w-full">
+                  <thead className="bg-[#f0f0f0]">
+                    <tr>
+                      <th className="font-['Satoshi',sans-serif] font-bold text-[16px] text-black py-[16px] px-[24px] text-left">Size</th>
+                      <th className="font-['Satoshi',sans-serif] font-bold text-[16px] text-black py-[16px] px-[24px] text-left">Rộng Vai (cm)</th>
+                      <th className="font-['Satoshi',sans-serif] font-bold text-[16px] text-black py-[16px] px-[24px] text-left">Dài Áo (cm)</th>
+                      <th className="font-['Satoshi',sans-serif] font-bold text-[16px] text-black py-[16px] px-[24px] text-left">Rộng Ngực (cm)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-t border-[rgba(0,0,0,0.1)]">
+                      <td className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] py-[16px] px-[24px]">S</td>
+                      <td className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] py-[16px] px-[24px]">44</td>
+                      <td className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] py-[16px] px-[24px]">68</td>
+                      <td className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] py-[16px] px-[24px]">96</td>
+                    </tr>
+                    <tr className="border-t border-[rgba(0,0,0,0.1)]">
+                      <td className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] py-[16px] px-[24px]">M</td>
+                      <td className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] py-[16px] px-[24px]">46</td>
+                      <td className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] py-[16px] px-[24px]">70</td>
+                      <td className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] py-[16px] px-[24px]">100</td>
+                    </tr>
+                    <tr className="border-t border-[rgba(0,0,0,0.1)]">
+                      <td className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] py-[16px] px-[24px]">L</td>
+                      <td className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] py-[16px] px-[24px]">48</td>
+                      <td className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] py-[16px] px-[24px]">72</td>
+                      <td className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] py-[16px] px-[24px]">104</td>
+                    </tr>
+                    <tr className="border-t border-[rgba(0,0,0,0.1)]">
+                      <td className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] py-[16px] px-[24px]">XL</td>
+                      <td className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] py-[16px] px-[24px]">50</td>
+                      <td className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] py-[16px] px-[24px]">74</td>
+                      <td className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] py-[16px] px-[24px]">108</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div className="flex items-center gap-[4px] mb-[12px]">
-              <p className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black">
-                Ethan R.
-              </p>
-              <img alt="" className="size-[24px]" src={imgFrame9} />
-            </div>
-            <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px] mb-[24px]">
-              "Chiếc áo này là món đồ không thể thiếu cho những ai yêu thích thiết kế đẹp. Họa tiết tối giản nhưng phong cách đã thu hút ánh nhìn của tôi, và form dáng hoàn hảo."
-            </p>
-            <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-[rgba(0,0,0,0.6)]">
-              Đăng vào 16 tháng 8, 2023
-            </p>
-          </div>
 
-          {/* Review 4 */}
-          <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[32px]">
-            <div className="h-[22.579px] w-[109.776px] mb-[15px]">
-              <img alt="" className="block size-full" src={imgFrame19} />
+            {/* Features */}
+            <div>
+              <h3 className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black mb-[16px]">
+                Đặc Điểm Nổi Bật
+              </h3>
+              <ul className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px] space-y-[8px]">
+                <li>• Thiết kế họa tiết độc đáo, trẻ trung</li>
+                <li>• Form dáng regular fit, thoải mái cho mọi vóc dáng</li>
+                <li>• Cổ tròn, tay ngắn phù hợp nhiều hoàn cảnh</li>
+                <li>• Dễ phối đồ với quần jeans, short, kaki</li>
+                <li>• Có 4 size từ S đến XL</li>
+              </ul>
             </div>
-            <div className="flex items-center gap-[4px] mb-[12px]">
-              <p className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black">
-                Olivia P.
-              </p>
-              <img alt="" className="size-[24px]" src={imgFrame9} />
-            </div>
-            <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px] mb-[24px]">
-              "Là một người đam mê UI/UX, tôi đánh giá cao sự đơn giản và chức năng. Chiếc áo này không chỉ thể hiện những nguyên tắc đó mà còn rất thoải mái khi mặc."
-            </p>
-            <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-[rgba(0,0,0,0.6)]">
-              Đăng vào 17 tháng 8, 2023
-            </p>
           </div>
+        )}
 
-          {/* Review 5 */}
-          <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[32px]">
-            <div className="h-[22.579px] w-[109.776px] mb-[15px]">
-              <img alt="" className="block size-full" src={imgFrame18} />
+        {activeTab === 'reviews' && (
+          <>
+            {/* Reviews Header */}
+            <div className="flex items-center justify-between mb-[32px]">
+              <div className="flex items-center gap-[8px]">
+                <h2 className="font-['Satoshi',sans-serif] font-bold text-[24px] text-black">
+                  Tất Cả Đánh Giá
+                </h2>
+                <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)]">
+                  (451)
+                </p>
+              </div>
+              <div className="flex gap-[10px]">
+                <div className="bg-[#f0f0f0] flex h-[48px] items-center justify-between px-[20px] py-[16px] rounded-[62px] size-[48px] cursor-pointer">
+                  <img alt="" className="w-[16px] h-[24px]" src={imgFrame7} />
+                </div>
+                <div className="bg-[#f0f0f0] flex h-[48px] items-center gap-[8px] px-[20px] py-[16px] rounded-[62px] w-[120px] cursor-pointer">
+                  <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-black">
+                    Mới Nhất
+                  </p>
+                  <img alt="" className="size-[16px]" src={imgFrame1} />
+                </div>
+                <button className="bg-black flex h-[48px] items-center px-[20px] py-[16px] rounded-[62px] w-[166px] hover:bg-gray-800 transition-colors">
+                  <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-white">
+                    Viết Đánh Giá
+                  </p>
+                </button>
+              </div>
             </div>
-            <div className="flex items-center gap-[4px] mb-[12px]">
-              <p className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black">
-                Liam K.
+
+            {/* Reviews Grid */}
+            <div className="grid grid-cols-2 gap-[20px] mb-[36px]">
+              {/* Review 1 */}
+              <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[32px]">
+                <div className="h-[22.579px] w-[127px] mb-[15px]">
+                  <img alt="" className="block size-full" src={imgFrame15} />
+                </div>
+                <div className="flex items-center gap-[4px] mb-[12px]">
+                  <p className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black">
+                    Samantha D.
+                  </p>
+                  <img alt="" className="size-[24px]" src={imgFrame9} />
+                </div>
+                <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px] mb-[24px]">
+                  "Tôi thực sự yêu thích chiếc áo này! Thiết kế độc đáo và chất liệu cực kỳ thoải mái. Là một nhà thiết kế, tôi đánh giá cao sự chú ý đến từng chi tiết. Đây đã trở thành chiếc áo yêu thích của tôi."
+                </p>
+                <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-[rgba(0,0,0,0.6)]">
+                  Đăng vào 14 tháng 8, 2023
+                </p>
+              </div>
+
+              {/* Review 2 */}
+              <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[32px]">
+                <div className="h-[22.579px] w-[109.776px] mb-[15px]">
+                  <img alt="" className="block size-full" src={imgFrame18} />
+                </div>
+                <div className="flex items-center gap-[4px] mb-[12px]">
+                  <p className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black">
+                    Alex M.
+                  </p>
+                  <img alt="" className="size-[24px]" src={imgFrame9} />
+                </div>
+                <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px] mb-[24px]">
+                  "Chiếc áo vượt quá mong đợi của tôi! Màu sắc rực rỡ và chất lượng in ấn hàng đầu. Là một nhà thiết kế UI/UX, tôi khá kỹ tính về tính thẩm mỹ, và chiếc áo này chắc chắn được tôi đánh giá cao."
+                </p>
+                <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-[rgba(0,0,0,0.6)]">
+                  Đăng vào 15 tháng 8, 2023
+                </p>
+              </div>
+
+              {/* Review 3 */}
+              <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[32px]">
+                <div className="h-[22.579px] w-[97.934px] mb-[15px]">
+                  <img alt="" className="block size-full" src={imgFrame17} />
+                </div>
+                <div className="flex items-center gap-[4px] mb-[12px]">
+                  <p className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black">
+                    Ethan R.
+                  </p>
+                  <img alt="" className="size-[24px]" src={imgFrame9} />
+                </div>
+                <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px] mb-[24px]">
+                  "Chiếc áo này là món đồ không thể thiếu cho những ai yêu thích thiết kế đẹp. Họa tiết tối giản nhưng phong cách đã thu hút ánh nhìn của tôi, và form dáng hoàn hảo."
+                </p>
+                <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-[rgba(0,0,0,0.6)]">
+                  Đăng vào 16 tháng 8, 2023
+                </p>
+              </div>
+
+              {/* Review 4 */}
+              <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[32px]">
+                <div className="h-[22.579px] w-[109.776px] mb-[15px]">
+                  <img alt="" className="block size-full" src={imgFrame19} />
+                </div>
+                <div className="flex items-center gap-[4px] mb-[12px]">
+                  <p className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black">
+                    Olivia P.
+                  </p>
+                  <img alt="" className="size-[24px]" src={imgFrame9} />
+                </div>
+                <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px] mb-[24px]">
+                  "Là một người đam mê UI/UX, tôi đánh giá cao sự đơn giản và chức năng. Chiếc áo này không chỉ thể hiện những nguyên tắc đó mà còn rất thoải mái khi mặc."
+                </p>
+                <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-[rgba(0,0,0,0.6)]">
+                  Đăng vào 17 tháng 8, 2023
+                </p>
+              </div>
+
+              {/* Review 5 */}
+              <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[32px]">
+                <div className="h-[22.579px] w-[109.776px] mb-[15px]">
+                  <img alt="" className="block size-full" src={imgFrame18} />
+                </div>
+                <div className="flex items-center gap-[4px] mb-[12px]">
+                  <p className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black">
+                    Liam K.
+                  </p>
+                  <img alt="" className="size-[24px]" src={imgFrame9} />
+                </div>
+                <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px] mb-[24px]">
+                  "Chiếc áo này là sự kết hợp giữa sự thoải mái và sáng tạo. Chất liệu mềm mại, và thiết kế nói lên kỹ năng của nhà thiết kế. Giống như mặc một tác phẩm nghệ thuật."
+                </p>
+                <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-[rgba(0,0,0,0.6)]">
+                  Đăng vào 18 tháng 8, 2023
+                </p>
+              </div>
+
+              {/* Review 6 */}
+              <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[32px]">
+                <div className="h-[22.579px] w-[127px] mb-[15px]">
+                  <img alt="" className="block size-full" src={imgFrame15} />
+                </div>
+                <div className="flex items-center gap-[4px] mb-[12px]">
+                  <p className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black">
+                    Ava H.
+                  </p>
+                  <img alt="" className="size-[24px]" src={imgFrame9} />
+                </div>
+                <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px] mb-[24px]">
+                  "Tôi không chỉ mặc một chiếc áo; tôi đang mặc một triết lý thiết kế. Các chi tiết tinh tế và cách bố trí suy nghĩ khiến chiếc áo này trở thành điểm khởi đầu cuộc trò chuyện."
+                </p>
+                <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-[rgba(0,0,0,0.6)]">
+                  Đăng vào 19 tháng 8, 2023
+                </p>
+              </div>
+            </div>
+
+            {/* Load More Button */}
+            <div className="flex justify-center">
+              <button className="border border-[rgba(0,0,0,0.1)] flex h-[52px] items-center justify-center px-[54px] py-[16px] rounded-[62px] w-[330px] hover:bg-gray-50 transition-colors">
+                <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-black">
+                  Xem Thêm Đánh Giá
+                </p>
+              </button>
+            </div>
+          </>
+        )}
+
+        {activeTab === 'faq' && (
+          <div className="space-y-[20px]">
+            {/* FAQ 1 */}
+            <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[24px]">
+              <h3 className="font-['Satoshi',sans-serif] font-bold text-[18px] text-black mb-[12px]">
+                Sản phẩm có đúng màu như hình không?
+              </h3>
+              <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px]">
+                Chúng tôi cố gắng hiển thị màu sắc sản phẩm chính xác nhất có thể. Tuy nhiên, màu sắc thực tế có thể 
+                khác đôi chút do cài đặt màn hình của bạn. Nếu bạn nhận được sản phẩm không đúng màu như mong đợi, 
+                bạn có thể đổi trả trong vòng 7 ngày.
               </p>
-              <img alt="" className="size-[24px]" src={imgFrame9} />
             </div>
-            <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px] mb-[24px]">
-              "Chiếc áo này là sự kết hợp giữa sự thoải mái và sáng tạo. Chất liệu mềm mại, và thiết kế nói lên kỹ năng của nhà thiết kế. Giống như mặc một tác phẩm nghệ thuật."
-            </p>
-            <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-[rgba(0,0,0,0.6)]">
-              Đăng vào 18 tháng 8, 2023
-            </p>
-          </div>
 
-          {/* Review 6 */}
-          <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[32px]">
-            <div className="h-[22.579px] w-[127px] mb-[15px]">
-              <img alt="" className="block size-full" src={imgFrame15} />
-            </div>
-            <div className="flex items-center gap-[4px] mb-[12px]">
-              <p className="font-['Satoshi',sans-serif] font-bold text-[20px] text-black">
-                Ava H.
+            {/* FAQ 2 */}
+            <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[24px]">
+              <h3 className="font-['Satoshi',sans-serif] font-bold text-[18px] text-black mb-[12px]">
+                Làm thế nào để chọn size phù hợp?
+              </h3>
+              <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px]">
+                Vui lòng tham khảo bảng size trong phần "Chi Tiết Sản Phẩm". Nếu bạn đang phân vân giữa 2 size, 
+                chúng tôi khuyên bạn nên chọn size lớn hơn để đảm bảo sự thoải mái. Bạn cũng có thể liên hệ 
+                với bộ phận chăm sóc khách hàng để được tư vấn chi tiết hơn.
               </p>
-              <img alt="" className="size-[24px]" src={imgFrame9} />
             </div>
-            <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px] mb-[24px]">
-              "Tôi không chỉ mặc một chiếc áo; tôi đang mặc một triết lý thiết kế. Các chi tiết tinh tế và cách bố trí suy nghĩ khiến chiếc áo này trở thành điểm khởi đầu cuộc trò chuyện."
-            </p>
-            <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-[rgba(0,0,0,0.6)]">
-              Đăng vào 19 tháng 8, 2023
-            </p>
-          </div>
-        </div>
 
-        {/* Load More Button */}
-        <div className="flex justify-center">
-          <button className="border border-[rgba(0,0,0,0.1)] flex h-[52px] items-center justify-center px-[54px] py-[16px] rounded-[62px] w-[330px] hover:bg-gray-50 transition-colors">
-            <p className="font-['Satoshi',sans-serif] font-medium text-[16px] text-black">
-              Xem Thêm Đánh Giá
-            </p>
-          </button>
-        </div>
+            {/* FAQ 3 */}
+            <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[24px]">
+              <h3 className="font-['Satoshi',sans-serif] font-bold text-[18px] text-black mb-[12px]">
+                Thời gian giao hàng là bao lâu?
+              </h3>
+              <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px]">
+                Đối với đơn hàng nội thành, thời gian giao hàng là 1-2 ngày làm việc. Với đơn hàng ngoại thành, 
+                thời gian giao hàng là 3-5 ngày làm việc. Chúng tôi sẽ gửi thông báo và mã vận đơn ngay khi đơn 
+                hàng được gửi đi.
+              </p>
+            </div>
+
+            {/* FAQ 4 */}
+            <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[24px]">
+              <h3 className="font-['Satoshi',sans-serif] font-bold text-[18px] text-black mb-[12px]">
+                Chính sách đổi trả như thế nào?
+              </h3>
+              <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px]">
+                Bạn có thể đổi trả sản phẩm trong vòng 7 ngày kể từ khi nhận hàng. Sản phẩm phải còn nguyên tem mác, 
+                chưa qua sử dụng và giặt tẩy. Chi phí vận chuyển đổi trả sẽ do khách hàng chịu nếu không phải lỗi 
+                từ phía shop.
+              </p>
+            </div>
+
+            {/* FAQ 5 */}
+            <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[24px]">
+              <h3 className="font-['Satoshi',sans-serif] font-bold text-[18px] text-black mb-[12px]">
+                Sản phẩm có bị phai màu không?
+              </h3>
+              <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px]">
+                Sản phẩm được làm từ chất liệu cotton cao cấp và công nghệ in ấn hiện đại, đảm bảo độ bền màu cao. 
+                Tuy nhiên, để giữ màu sắc lâu dài, bạn nên tuân thủ hướng dẫn giặt là và tránh phơi trực tiếp dưới 
+                ánh nắng mặt trời.
+              </p>
+            </div>
+
+            {/* FAQ 6 */}
+            <div className="border border-[rgba(0,0,0,0.1)] rounded-[20px] p-[24px]">
+              <h3 className="font-['Satoshi',sans-serif] font-bold text-[18px] text-black mb-[12px]">
+                Tôi có thể đặt hàng số lượng lớn không?
+              </h3>
+              <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] leading-[22px]">
+                Có, chúng tôi hỗ trợ đặt hàng số lượng lớn với mức giá ưu đãi. Vui lòng liên hệ trực tiếp với bộ 
+                phận bán hàng qua hotline 1900.xxxx hoặc email sales@clothify.com để được tư vấn chi tiết về giá 
+                và thời gian giao hàng.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* You Might Also Like Section */}
@@ -499,8 +637,8 @@ export default function ProductDetail() {
               </p>
             </div>
             <div className="flex items-center gap-[10px]">
-              <span className="font-['Satoshi',sans-serif] font-bold text-[24px] text-black">$212</span>
-              <span className="font-['Satoshi',sans-serif] font-bold text-[24px] text-[rgba(0,0,0,0.4)] line-through">$242</span>
+              <span className="font-['Satoshi',sans-serif] font-bold text-[24px] text-black">212.000₫</span>
+              <span className="font-['Satoshi',sans-serif] font-bold text-[24px] text-[rgba(0,0,0,0.4)] line-through">242.000₫</span>
               <div className="bg-[rgba(255,51,51,0.1)] px-[14px] py-[6px] rounded-[62px]">
                 <span className="font-['Satoshi',sans-serif] font-medium text-[12px] text-[#f33]">-20%</span>
               </div>
@@ -524,7 +662,7 @@ export default function ProductDetail() {
                 <span className="text-[rgba(0,0,0,0.6)]">5</span>
               </p>
             </div>
-            <span className="font-['Satoshi',sans-serif] font-bold text-[24px] text-black">$145</span>
+            <span className="font-['Satoshi',sans-serif] font-bold text-[24px] text-black">145.000₫</span>
           </div>
 
           {/* Product 3 */}
@@ -544,7 +682,7 @@ export default function ProductDetail() {
                 <span className="text-[rgba(0,0,0,0.6)]">5</span>
               </p>
             </div>
-            <span className="font-['Satoshi',sans-serif] font-bold text-[24px] text-black">$180</span>
+            <span className="font-['Satoshi',sans-serif] font-bold text-[24px] text-black">180.000₫</span>
           </div>
 
           {/* Product 4 */}
@@ -565,8 +703,8 @@ export default function ProductDetail() {
               </p>
             </div>
             <div className="flex items-center gap-[10px]">
-              <span className="font-['Satoshi',sans-serif] font-bold text-[24px] text-black">$120</span>
-              <span className="font-['Satoshi',sans-serif] font-bold text-[24px] text-[rgba(0,0,0,0.4)] line-through">$150</span>
+              <span className="font-['Satoshi',sans-serif] font-bold text-[24px] text-black">120.000₫</span>
+              <span className="font-['Satoshi',sans-serif] font-bold text-[24px] text-[rgba(0,0,0,0.4)] line-through">150.000₫</span>
               <div className="bg-[rgba(255,51,51,0.1)] px-[14px] py-[6px] rounded-[62px]">
                 <span className="font-['Satoshi',sans-serif] font-medium text-[12px] text-[#f33]">-30%</span>
               </div>

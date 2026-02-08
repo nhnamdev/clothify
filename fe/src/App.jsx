@@ -5,6 +5,9 @@ import Cart from './components/Cart'
 import Category from './components/Category'
 import Login from './components/Login'
 import Register from './components/Register'
+import Store from './components/Store'
+import Checkout from './components/Checkout'
+import Account from './components/Account'
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/category" element={<Category />} />
         <Route path="/category/:name" element={<Category />} />
+        <Route path="/store" element={<Store />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/account" element={<Account />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
