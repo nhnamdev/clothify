@@ -6,17 +6,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateOrderItemRequest {
 
     @NotNull(message = "Product ID is required")
-    private UUID productId;
+    private Long productId;
 
-    private UUID variantId;
+    private Long variantId;
 
     @NotNull(message = "Quantity is required")
     @Min(value = 1, message = "Quantity must be at least 1")

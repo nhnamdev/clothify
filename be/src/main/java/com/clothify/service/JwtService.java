@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
-import java.util.UUID;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * Service để xử lý Supabase JWT tokens Supabase JWT structure: { "sub":
- * "user-uuid", // User ID "email": "user@example.com", "role": "authenticated",
- * "iat": 1234567890, "exp": 1234567890 }
+ * Service for JWT token generation and validation
  */
 @Service
 public class JwtService {
@@ -21,18 +21,37 @@ public class JwtService {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
+    @Value("${jwt.expiration}")
+    private long jwtExpiration;
+
     /**
-     * Extract User ID từ JWT token Supabase lưu user ID trong claim "sub"
-     * (subject)
+     * Generate JWT token for user
      */
-    public UUID extractUserId(String token) {
-        Claims claims = extractAllClaims(token);
-        String sub = claims.getSubject();
-        return UUID.fromString(sub);
+    public String generateToken(Long userId, String email) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", userId);
+        claims.put("email", email);
+        claims.put("role", "authenticated");
+
+        return Jwts.builder()
+                .claims(claims)
+                .subject(userId.toString())
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
+                .signWith(getSignKey())
+                .compact();
     }
 
     /**
-     * Extract email từ JWT token
+     * Extract User ID from JWT token
+     */
+    public Long extractUserId(String token) {
+        Claims claims = extractAllClaims(token);
+        return claims.get("userId", Long.class);
+    }
+
+    /**
+     * Extract email from JWT token
      */
     public String extractEmail(String token) {
         Claims claims = extractAllClaims(token);
@@ -40,7 +59,7 @@ public class JwtService {
     }
 
     /**
-     * Extract role từ JWT token
+     * Extract role from JWT token
      */
     public String extractRole(String token) {
         Claims claims = extractAllClaims(token);
@@ -48,26 +67,32 @@ public class JwtService {
     }
 
     /**
-     * Kiểm tra token có hợp lệ không
+     * Check if token is valid
      */
     public boolean isTokenValid(String token) {
         try {
-            extractAllClaims(token);
-            return true;
+            Claims claims = extractAllClaims(token);
+            return !claims.getExpiration().before(new Date());
         } catch (Exception e) {
             return false;
         }
     }
 
     /**
-     * Parse JWT token và lấy tất cả claims
+     * Parse JWT token and get all claims
      */
     private Claims extractAllClaims(String token) {
-        SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
         return Jwts.parser()
-                .verifyWith(key)
+                .verifyWith(getSignKey())
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
+    }
+
+    /**
+     * Get signing key from secret
+     */
+    private SecretKey getSignKey() {
+        return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
     }
 }

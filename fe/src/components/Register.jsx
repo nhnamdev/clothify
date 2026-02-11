@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function Register() {
   const navigate = useNavigate();
+  const { register } = useAuth();
   const [formData, setFormData] = useState({
-    fullName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -12,24 +15,57 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setSuccessMessage('');
     
+    // Validation
     if (formData.password !== formData.confirmPassword) {
-      alert('Mật khẩu không khớp!');
+      setError('Mật khẩu không khớp!');
       return;
     }
 
     if (!agreeTerms) {
-      alert('Vui lòng đồng ý với điều khoản sử dụng!');
+      setError('Vui lòng đồng ý với điều khoản sử dụng!');
       return;
     }
 
-    // Handle registration logic here
-    console.log('Register:', formData);
-    // Navigate to login after successful registration
-    navigate('/login');
+    if (formData.password.length < 8) {
+      setError('Mật khẩu phải có ít nhất 8 ký tự!');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const result = await register({
+        email: formData.email,
+        password: formData.password,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+      });
+
+      if (result.success) {
+        setSuccessMessage(result.message || 'Đăng ký thành công!');
+        
+        // Navigate to home after successful registration (already logged in)
+        setTimeout(() => {
+          navigate('/');
+        }, 1500);
+      } else {
+        setError(result.error || 'Đăng ký thất bại. Vui lòng thử lại.');
+      }
+    } catch (err) {
+      console.error('Registration error:', err);
+      setError('Có lỗi xảy ra. Vui lòng thử lại sau.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -37,6 +73,9 @@ export default function Register() {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    // Clear error when user starts typing
+    if (error) setError('');
+    if (successMessage) setSuccessMessage('');
   };
 
   return (
@@ -92,21 +131,52 @@ export default function Register() {
             Tạo tài khoản mới để bắt đầu mua sắm.
           </p>
 
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-[20px] mb-6">
+              <p className="font-['Satoshi',sans-serif] text-[14px]">{error}</p>
+            </div>
+          )}
+
+          {/* Success Message */}
+          {successMessage && (
+            <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-[20px] mb-6">
+              <p className="font-['Satoshi',sans-serif] text-[14px]">{successMessage}</p>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Full Name */}
-            <div>
-              <label className="font-['Satoshi',sans-serif] font-medium text-[14px] text-black block mb-2">
-                Họ và tên
-              </label>
-              <input
-                type="text"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                placeholder="Nhập họ và tên của bạn"
-                required
-                className="w-full bg-[#f0f0f0] px-[16px] py-[14px] rounded-[62px] font-['Satoshi',sans-serif] text-[16px] text-black placeholder:text-[rgba(0,0,0,0.4)] outline-none focus:ring-2 focus:ring-black transition-all"
-              />
+            {/* First Name and Last Name */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="font-['Satoshi',sans-serif] font-medium text-[14px] text-black block mb-2">
+                  Họ
+                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  placeholder="Nhập họ"
+                  required
+                  className="w-full bg-[#f0f0f0] px-[16px] py-[14px] rounded-[62px] font-['Satoshi',sans-serif] text-[16px] text-black placeholder:text-[rgba(0,0,0,0.4)] outline-none focus:ring-2 focus:ring-black transition-all"
+                />
+              </div>
+
+              <div>
+                <label className="font-['Satoshi',sans-serif] font-medium text-[14px] text-black block mb-2">
+                  Tên
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  placeholder="Nhập tên"
+                  required
+                  className="w-full bg-[#f0f0f0] px-[16px] py-[14px] rounded-[62px] font-['Satoshi',sans-serif] text-[16px] text-black placeholder:text-[rgba(0,0,0,0.4)] outline-none focus:ring-2 focus:ring-black transition-all"
+                />
+              </div>
             </div>
 
             {/* Email */}
@@ -222,9 +292,10 @@ export default function Register() {
             {/* Register Button */}
             <button
               type="submit"
-              className="w-full bg-black text-white font-['Satoshi',sans-serif] font-medium text-[16px] py-[14px] rounded-[62px] hover:bg-gray-800 transition-colors"
+              disabled={loading || !!successMessage}
+              className="w-full bg-black text-white font-['Satoshi',sans-serif] font-medium text-[16px] py-[14px] rounded-[62px] hover:bg-gray-800 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
-              Tạo Tài Khoản
+              {loading ? 'Đang tạo tài khoản...' : successMessage ? 'Đang chuyển hướng...' : 'Tạo Tài Khoản'}
             </button>
 
             {/* Divider */}

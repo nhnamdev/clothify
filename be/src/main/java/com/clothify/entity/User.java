@@ -10,31 +10,25 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String name;
-
     @Column(unique = true, nullable = false)
-    private String slug;
+    private String email;
 
-    @Column(columnDefinition = "TEXT")
-    private String description;
+    @Column(nullable = false)
+    private String password; // BCrypt hashed
 
-    @ManyToOne
-    @JoinColumn(name = "parent_id")
-    private Category parent;
-
-    @Column(name = "display_order", columnDefinition = "INTEGER DEFAULT 0")
-    private Integer displayOrder = 0;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_id", unique = true)
+    private Profile profile;
 
     @Column(name = "is_active", columnDefinition = "BOOLEAN DEFAULT true")
     private Boolean isActive = true;

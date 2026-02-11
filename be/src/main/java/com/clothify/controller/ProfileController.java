@@ -8,14 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 /**
- * Controller để quản lý user profile Tất cả endpoints require authentication
+ * Controller for managing user profiles All endpoints require authentication
  * (JWT token)
- *
- * Example request: GET /api/v1/users/me/profile Authorization: Bearer
- * <supabase-jwt-token>
  */
 @RestController
 @RequestMapping("/users/me")
@@ -25,15 +20,15 @@ public class ProfileController {
     private final ProfileRepository profileRepository;
 
     /**
-     * Lấy profile của user hiện tại userId được extract từ JWT token tự động
-     * bởi JwtAuthenticationFilter
+     * Get current user's profile userId is extracted from JWT token
+     * automatically by JwtAuthenticationFilter
      *
-     * @param userId UUID của user (từ JWT token)
-     * @return Profile của user
+     * @param userId Long ID of user (from JWT token)
+     * @return User's profile
      */
     @GetMapping("/profile")
     public ResponseEntity<ApiResponse<Profile>> getMyProfile(
-            @AuthenticationPrincipal UUID userId
+            @AuthenticationPrincipal Long userId
     ) {
         Profile profile = profileRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Profile not found"));
@@ -42,18 +37,18 @@ public class ProfileController {
     }
 
     /**
-     * Cập nhật profile của user hiện tại Chỉ cho phép user update profile của
-     * chính mình
+     * Update current user's profile Only allows user to update their own
+     * profile
      */
     @PutMapping("/profile")
     public ResponseEntity<ApiResponse<Profile>> updateMyProfile(
-            @AuthenticationPrincipal UUID userId,
+            @AuthenticationPrincipal Long userId,
             @RequestBody Profile updatedProfile
     ) {
         Profile profile = profileRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Profile not found"));
 
-        // Update các fields (có thể dùng ModelMapper)
+        // Update fields
         if (updatedProfile.getFirstName() != null) {
             profile.setFirstName(updatedProfile.getFirstName());
         }
@@ -75,14 +70,14 @@ public class ProfileController {
     }
 
     /**
-     * Lấy ID của user hiện tại Endpoint đơn giản để test JWT authentication
+     * Get current user's ID Simple endpoint to test JWT authentication
      */
     @GetMapping("/id")
     public ResponseEntity<ApiResponse<String>> getMyUserId(
-            @AuthenticationPrincipal UUID userId
+            @AuthenticationPrincipal Long userId
     ) {
         return ResponseEntity.ok(
-                ApiResponse.success("Your user ID: " + userId.toString())
+                ApiResponse.success("Your user ID: " + userId)
         );
     }
 }

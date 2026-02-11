@@ -6,12 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
-public interface ProductImageRepository extends JpaRepository<ProductImage, UUID> {
+public interface ProductImageRepository extends JpaRepository<ProductImage, Long> {
 
-    List<ProductImage> findByProductIdOrderByDisplayOrderAsc(UUID productId);
+    List<ProductImage> findByProductIdOrderByDisplayOrderAsc(Long productId);
 
-    Optional<ProductImage> findByProductIdAndIsPrimaryTrue(UUID productId);
+    Optional<ProductImage> findByProductIdAndIsPrimaryTrue(Long productId);
 }

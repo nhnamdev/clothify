@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/categories")
@@ -36,9 +35,9 @@ public class CategoryController {
     public ResponseEntity<ApiResponse<CategoryDTO>> getCategory(@PathVariable String identifier) {
         CategoryDTO category;
         try {
-            UUID id = UUID.fromString(identifier);
+            Long id = Long.valueOf(identifier);
             category = categoryService.getCategoryById(id);
-        } catch (IllegalArgumentException e) {
+        } catch (NumberFormatException e) {
             category = categoryService.getCategoryBySlug(identifier);
         }
         return ResponseEntity.ok(ApiResponse.success(category));
@@ -47,7 +46,7 @@ public class CategoryController {
     @GetMapping("/{categoryId}/products")
     @Operation(summary = "Get products in category")
     public ResponseEntity<ApiResponse<Page<ProductDTO>>> getCategoryProducts(
-            @PathVariable UUID categoryId,
+            @PathVariable Long categoryId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size) {
         Page<ProductDTO> products = productService.getProductsByCategory(categoryId, page, size);

@@ -1,21 +1,47 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Login:', formData);
-    // Navigate to home after successful login
-    navigate('/');
+    setError('');
+    setLoading(true);
+
+    try {
+      const result = await login({
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (result.success) {
+        // Store session info if remember me is checked
+        if (rememberMe) {
+          localStorage.setItem('rememberMe', 'true');
+        }
+        
+        // Navigate to home after successful login
+        navigate('/');
+      } else {
+        setError(result.error || 'Đăng nhập thất bại. Vui lòng kiểm tra lại email và mật khẩu.');
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('Có lỗi xảy ra. Vui lòng thử lại sau.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -23,6 +49,8 @@ export default function Login() {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    // Clear error when user starts typing
+    if (error) setError('');
   };
 
   return (
@@ -77,6 +105,13 @@ export default function Login() {
           <p className="font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)] mb-8">
             Chào mừng trở lại! Vui lòng nhập thông tin của bạn.
           </p>
+
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-[20px] mb-6">
+              <p className="font-['Satoshi',sans-serif] text-[14px]">{error}</p>
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email */}
@@ -154,9 +189,10 @@ export default function Login() {
             {/* Login Button */}
             <button
               type="submit"
-              className="w-full bg-black text-white font-['Satoshi',sans-serif] font-medium text-[16px] py-[14px] rounded-[62px] hover:bg-gray-800 transition-colors"
+              disabled={loading}
+              className="w-full bg-black text-white font-['Satoshi',sans-serif] font-medium text-[16px] py-[14px] rounded-[62px] hover:bg-gray-800 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
-              Đăng Nhập
+              {loading ? 'Đang đăng nhập...' : 'Đăng Nhập'}
             </button>
 
             {/* Divider */}

@@ -25,14 +25,15 @@ public class SecurityConfig {
                 .cors(cors -> {
                 })
                 .authorizeHttpRequests(auth -> auth
-                // Public endpoints - không cần authentication
+                // Public endpoints - no authentication required
+                .requestMatchers("/auth/**").permitAll() // Register, login
                 .requestMatchers("/products/**").permitAll()
                 .requestMatchers("/categories/**").permitAll()
                 .requestMatchers("/stores/**").permitAll()
                 .requestMatchers("/reviews/**").permitAll()
                 // Swagger/OpenAPI
                 .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-                // Protected endpoints - cần JWT token
+                // Protected endpoints - JWT token required
                 .requestMatchers("/users/**").authenticated()
                 // All other endpoints require authentication
                 .anyRequest().authenticated()
@@ -40,7 +41,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
-                // Thêm JWT filter trước UsernamePasswordAuthenticationFilter
+                // Add JWT filter before UsernamePasswordAuthenticationFilter
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

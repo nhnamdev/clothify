@@ -18,9 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
-
 
 @Service
 @RequiredArgsConstructor
@@ -38,7 +36,7 @@ public class ProductService {
         return products.map(this::convertToDTO);
     }
 
-    public Page<ProductDTO> getProductsByCategory(UUID categoryId, int page, int size) {
+    public Page<ProductDTO> getProductsByCategory(Long categoryId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Product> products = productRepository.findByCategoryIdAndIsActiveTrue(categoryId, pageable);
         return products.map(this::convertToDTO);
@@ -50,7 +48,7 @@ public class ProductService {
         return convertToDTO(product);
     }
 
-    public ProductDTO getProductById(UUID id) {
+    public ProductDTO getProductById(Long id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found: " + id));
         return convertToDTO(product);
@@ -90,19 +88,19 @@ public class ProductService {
 
     private ProductDTO convertToDTO(Product product) {
         ProductDTO dto = modelMapper.map(product, ProductDTO.class);
-        
+
         // Load images
         List<ProductImage> images = productImageRepository.findByProductIdOrderByDisplayOrderAsc(product.getId());
         dto.setImages(images.stream()
                 .map(img -> modelMapper.map(img, ProductImageDTO.class))
                 .collect(Collectors.toList()));
-        
+
         // Load variants
         List<ProductVariant> variants = productVariantRepository.findByProductId(product.getId());
         dto.setVariants(variants.stream()
                 .map(variant -> modelMapper.map(variant, ProductVariantDTO.class))
                 .collect(Collectors.toList()));
-        
+
         return dto;
     }
 }

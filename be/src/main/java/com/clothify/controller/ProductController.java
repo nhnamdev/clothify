@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/products")
@@ -38,9 +37,9 @@ public class ProductController {
     public ResponseEntity<ApiResponse<ProductDTO>> getProduct(@PathVariable String identifier) {
         ProductDTO product;
         try {
-            UUID id = UUID.fromString(identifier);
+            Long id = Long.valueOf(identifier);
             product = productService.getProductById(id);
-        } catch (IllegalArgumentException e) {
+        } catch (NumberFormatException e) {
             product = productService.getProductBySlug(identifier);
         }
         return ResponseEntity.ok(ApiResponse.success(product));
@@ -49,7 +48,7 @@ public class ProductController {
     @GetMapping("/filter")
     @Operation(summary = "Filter products", description = "Filter by category, price range, or special flags. Use query params: categoryId, minPrice, maxPrice, filter (new/featured/top-rated), search")
     public ResponseEntity<ApiResponse<Page<ProductDTO>>> filterProducts(
-            @RequestParam(required = false) UUID categoryId,
+            @RequestParam(required = false) Long categoryId,
             @RequestParam(required = false) BigDecimal minPrice,
             @RequestParam(required = false) BigDecimal maxPrice,
             @RequestParam(required = false) String filter,

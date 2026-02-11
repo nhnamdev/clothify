@@ -10,7 +10,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "profiles")
@@ -20,8 +19,8 @@ import java.util.UUID;
 public class Profile {
 
     @Id
-    @Column(columnDefinition = "uuid")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -36,6 +35,7 @@ public class Profile {
 
     private LocalDate birthday;
 
+    @Column(name = "avatar_url")
     private String avatar;
 
     @Column(name = "total_spent", precision = 12, scale = 2, columnDefinition = "DECIMAL(12,2) DEFAULT 0")

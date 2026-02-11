@@ -8,10 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
-public interface DiscountCodeRepository extends JpaRepository<DiscountCode, UUID> {
+public interface DiscountCodeRepository extends JpaRepository<DiscountCode, Long> {
 
     Optional<DiscountCode> findByCode(String code);
 

@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/users/{userId}/cart")
@@ -25,7 +24,7 @@ public class CartController {
 
     @GetMapping
     @Operation(summary = "Get user's cart")
-    public ResponseEntity<ApiResponse<List<CartItemDTO>>> getCart(@PathVariable UUID userId) {
+    public ResponseEntity<ApiResponse<List<CartItemDTO>>> getCart(@PathVariable Long userId) {
         List<CartItemDTO> cart = cartService.getCart(userId);
         return ResponseEntity.ok(ApiResponse.success(cart));
     }
@@ -33,7 +32,7 @@ public class CartController {
     @PostMapping("/items")
     @Operation(summary = "Add item to cart")
     public ResponseEntity<ApiResponse<CartItemDTO>> addToCart(
-            @PathVariable UUID userId,
+            @PathVariable Long userId,
             @Valid @RequestBody AddToCartRequest request) {
         CartItemDTO cartItem = cartService.addToCart(userId, request);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -43,8 +42,8 @@ public class CartController {
     @PutMapping("/items/{cartItemId}")
     @Operation(summary = "Update cart item quantity")
     public ResponseEntity<ApiResponse<CartItemDTO>> updateCartItem(
-            @PathVariable UUID userId,
-            @PathVariable UUID cartItemId,
+            @PathVariable Long userId,
+            @PathVariable Long cartItemId,
             @RequestParam Integer quantity) {
         CartItemDTO cartItem = cartService.updateCartItem(cartItemId, quantity);
         return ResponseEntity.ok(ApiResponse.success("Đã cập nhật giỏ hàng", cartItem));
@@ -53,22 +52,22 @@ public class CartController {
     @DeleteMapping("/items/{cartItemId}")
     @Operation(summary = "Remove item from cart")
     public ResponseEntity<Void> removeFromCart(
-            @PathVariable UUID userId,
-            @PathVariable UUID cartItemId) {
+            @PathVariable Long userId,
+            @PathVariable Long cartItemId) {
         cartService.removeFromCart(cartItemId);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping
     @Operation(summary = "Clear cart")
-    public ResponseEntity<Void> clearCart(@PathVariable UUID userId) {
+    public ResponseEntity<Void> clearCart(@PathVariable Long userId) {
         cartService.clearCart(userId);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/count")
     @Operation(summary = "Get cart item count")
-    public ResponseEntity<ApiResponse<Long>> getCartItemCount(@PathVariable UUID userId) {
+    public ResponseEntity<ApiResponse<Long>> getCartItemCount(@PathVariable Long userId) {
         Long count = cartService.getCartItemCount(userId);
         return ResponseEntity.ok(ApiResponse.success(count));
     }

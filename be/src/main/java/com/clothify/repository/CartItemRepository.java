@@ -9,19 +9,18 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
-public interface CartItemRepository extends JpaRepository<CartItem, UUID> {
+public interface CartItemRepository extends JpaRepository<CartItem, Long> {
 
-    List<CartItem> findByUserId(UUID userId);
+    List<CartItem> findByUserId(Long userId);
 
-    Optional<CartItem> findByUserIdAndProductIdAndVariantId(UUID userId, UUID productId, UUID variantId);
+    Optional<CartItem> findByUserIdAndProductIdAndVariantId(Long userId, Long productId, Long variantId);
 
     @Modifying
     @Query("DELETE FROM CartItem c WHERE c.user.id = :userId")
-    void deleteByUserId(@Param("userId") UUID userId);
+    void deleteByUserId(@Param("userId") Long userId);
 
     @Query("SELECT COUNT(c) FROM CartItem c WHERE c.user.id = :userId")
-    Long countByUserId(@Param("userId") UUID userId);
+    Long countByUserId(@Param("userId") Long userId);
 }

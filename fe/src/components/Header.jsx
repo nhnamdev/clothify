@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const imgFrame = "https://www.figma.com/api/mcp/asset/4ab7a5fa-2d39-4da7-b499-d425fe5213ec";
 const imgFrame1 = "https://www.figma.com/api/mcp/asset/7701ec5a-4892-4d57-82b9-f0bc3260ee70";
@@ -9,6 +10,7 @@ const imgFrame4 = "https://www.figma.com/api/mcp/asset/5004aff2-a100-41ad-91a7-7
 
 export default function Header() {
   const navigate = useNavigate();
+  const { user } = useAuth(); // Lấy user state từ AuthContext
   const [showBanner, setShowBanner] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [showProductDropdown, setShowProductDropdown] = useState(false);
@@ -266,11 +268,20 @@ export default function Header() {
             </svg>
           </div>
           <div 
-            className="relative shrink-0 size-[24px] cursor-pointer" 
+            className="relative shrink-0 size-[24px] cursor-pointer group" 
             data-name="Frame"
-            onClick={() => navigate('/login')}
+            onClick={() => navigate(user ? '/account' : '/login')}
+            title={user ? `Tài khoản: ${user.email}` : 'Đăng nhập'}
           >
-            <img alt="user" className="block max-w-none size-full" src={imgFrame4} />
+            <img 
+              alt="user" 
+              className={`block max-w-none size-full transition-transform group-hover:scale-110 ${user ? 'ring-2 ring-black rounded-full' : ''}`}
+              src={imgFrame4} 
+            />
+            {user && (
+              <div className="absolute -top-1 -right-1 size-2 bg-green-500 rounded-full border-2 border-white" 
+                   title="Đã đăng nhập" />
+            )}
           </div>
         </div>
       </div>

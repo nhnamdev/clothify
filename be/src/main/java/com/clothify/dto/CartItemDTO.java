@@ -5,14 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartItemDTO {
 
-    private UUID id;
+    private Long id;
     private ProductDTO product;
     private ProductVariantDTO variant;
     private Integer quantity;

@@ -1,19 +1,94 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import { getUserProfile, updateUserProfile, logoutUser } from '../services/api';
 import Header from './Header';
 
 export default function Account() {
   const navigate = useNavigate();
+  const { user, loading: authLoading } = useAuth();
   const [activeTab, setActiveTab] = useState('profile');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   
-  // Sample data
+  // User profile data from backend
   const [userInfo, setUserInfo] = useState({
-    firstName: 'Nguyễn',
-    lastName: 'Văn A',
-    email: 'nguyenvana@email.com',
-    phone: '0912345678',
-    birthday: '1990-01-01'
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    birthday: ''
   });
+
+  // Load user profile from backend
+  useEffect(() => {
+    // Wait for auth to finish loading
+    if (authLoading) {
+      return;
+    }
+
+    // If not logged in after loading, redirect to login
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+
+    loadUserProfile();
+  }, [user, authLoading, navigate]);
+
+  const loadUserProfile = async () => {
+    try {
+      setLoading(true);
+      const result = await getUserProfile();
+      
+      if (result.success) {
+        const profile = result.data;
+        setUserInfo({
+          firstName: profile.firstName || '',
+          lastName: profile.lastName || '',
+          email: user.email || profile.email || '',
+          phone: profile.phone || '',
+          birthday: profile.dateOfBirth || ''
+        });
+      } else {
+        // Nếu chưa có profile, dùng email từ auth
+        setUserInfo(prev => ({
+          ...prev,
+          email: user.email || ''
+        }));
+      }
+    } catch (err) {
+      console.error('Error loading profile:', err);
+      setError('Không thể tải thông tin tài khoản');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSaveProfile = async () => {
+    try {
+      setLoading(true);
+      setError('');
+      
+      const result = await updateUserProfile({
+        firstName: userInfo.firstName,
+        lastName: userInfo.lastName,
+        phone: userInfo.phone,
+        dateOfBirth: userInfo.birthday
+      });
+
+      if (result.success) {
+        alert('Cập nhật thông tin thành công!');
+      } else {
+        setError(result.error || 'Không thể cập nhật thông tin');
+      }
+    } catch (err) {
+      console.error('Error updating profile:', err);
+      setError('Có lỗi xảy ra khi cập nhật thông tin');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const orders = [
     {
@@ -93,9 +168,17 @@ export default function Account() {
     }
   ];
 
-  const handleLogout = () => {
-    // Handle logout logic
-    navigate('/login');
+  const handleLogout = async () => {
+    try {
+      const result = await logoutUser();
+      if (result.success) {
+        navigate('/login');
+      }
+    } catch (err) {
+      console.error('Logout error:', err);
+      // Navigate anyway
+      navigate('/login');
+    }
   };
 
   const getStatusColor = (status) => {
@@ -109,15 +192,25 @@ export default function Account() {
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-[#f5f5f5]">
       <Header />
       
-      <div className="max-w-[1240px] mx-auto px-[100px] py-[50px]">
-        <h1 className="font-['Integral_CF',sans-serif] font-bold text-[40px] mb-[40px]">
-          Tài Khoản Của Tôi
-        </h1>
+      {/* Main Content - với margin-top để tránh header */}
+      <div className="pt-[180px] pb-[50px]">
+        <div className="max-w-[1240px] mx-auto px-[100px]">
+          <h1 className="font-['Integral_CF',sans-serif] font-bold text-[40px] mb-[40px]">
+            Tài Khoản Của Tôi
+          </h1>
 
-        <div className="flex gap-[40px]">
+          {(authLoading || loading) ? (
+            <div className="text-center py-20">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+              <p className="mt-4 font-['Satoshi',sans-serif] text-[16px] text-[rgba(0,0,0,0.6)]">
+                Đang tải thông tin...
+              </p>
+            </div>
+          ) : (
+            <div className="flex gap-[40px]">
           {/* Sidebar Menu */}
           <div className="w-[280px] flex-shrink-0">
             <div className="bg-white rounded-[20px] p-[24px] sticky top-[20px]">
@@ -261,8 +354,18 @@ export default function Account() {
                     />
                   </div>
                   
-                  <button className="w-full bg-black text-white font-['Satoshi',sans-serif] font-medium text-[16px] py-[14px] rounded-[62px] hover:bg-gray-800 transition-colors">
-                    Lưu thay đổi
+                  {error && (
+                    <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-[12px]">
+                      <p className="font-['Satoshi',sans-serif] text-[14px]">{error}</p>
+                    </div>
+                  )}
+
+                  <button 
+                    onClick={handleSaveProfile}
+                    disabled={loading}
+                    className="w-full bg-black text-white font-['Satoshi',sans-serif] font-medium text-[16px] py-[14px] rounded-[62px] hover:bg-gray-800 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  >
+                    {loading ? 'Đang lưu...' : 'Lưu thay đổi'}
                   </button>
                 </div>
               </div>
@@ -611,18 +714,20 @@ export default function Account() {
             )}
           </div>
         </div>
+        )}
       </div>
+    </div>
 
-      {/* Footer */}
-      <div className="bg-[#f0f0f0] w-full">
-        <div className="px-[100px] pt-[50px] pb-[40px]">
-          <div className="flex items-center justify-between">
-            <p className="font-['Satoshi',sans-serif] text-[14px] text-[rgba(0,0,0,0.6)]">
-              Clothify © 2000-2026, Bảo lưu mọi quyền
-            </p>
-          </div>
+    {/* Footer */}
+    <div className="bg-[#f0f0f0] w-full">
+      <div className="px-[100px] pt-[50px] pb-[40px]">
+        <div className="flex items-center justify-between">
+          <p className="font-['Satoshi',sans-serif] text-[14px] text-[rgba(0,0,0,0.6)]">
+            Clothify © 2000-2026, Bảo lưu mọi quyền
+          </p>
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 }

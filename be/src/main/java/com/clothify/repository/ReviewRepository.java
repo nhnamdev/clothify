@@ -9,22 +9,21 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.UUID;
 
 @Repository
-public interface ReviewRepository extends JpaRepository<Review, UUID> {
+public interface ReviewRepository extends JpaRepository<Review, Long> {
 
-    Page<Review> findByProductIdAndIsApprovedTrue(UUID productId, Pageable pageable);
+    Page<Review> findByProductIdAndIsApprovedTrue(Long productId, Pageable pageable);
 
-    List<Review> findByProductIdAndIsApprovedTrueOrderByCreatedAtDesc(UUID productId);
+    List<Review> findByProductIdAndIsApprovedTrueOrderByCreatedAtDesc(Long productId);
 
-    List<Review> findByUserId(UUID userId);
+    List<Review> findByUserId(Long userId);
 
-    boolean existsByUserIdAndProductId(UUID userId, UUID productId);
+    boolean existsByUserIdAndProductId(Long userId, Long productId);
 
     @Query("SELECT AVG(r.rating) FROM Review r WHERE r.product.id = :productId AND r.isApproved = true")
-    Double getAverageRatingByProductId(@Param("productId") UUID productId);
+    Double getAverageRatingByProductId(@Param("productId") Long productId);
 
     @Query("SELECT COUNT(r) FROM Review r WHERE r.product.id = :productId AND r.isApproved = true")
-    Long countByProductId(@Param("productId") UUID productId);
+    Long countByProductId(@Param("productId") Long productId);
 }

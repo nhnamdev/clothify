@@ -14,8 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 @RestController
 @RequestMapping("/users/{userId}/orders")
 @RequiredArgsConstructor
@@ -27,7 +25,7 @@ public class OrderController {
     @PostMapping
     @Operation(summary = "Create new order")
     public ResponseEntity<ApiResponse<OrderDTO>> createOrder(
-            @PathVariable UUID userId,
+            @PathVariable Long userId,
             @Valid @RequestBody CreateOrderRequest request) {
         OrderDTO order = orderService.createOrder(userId, request);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -37,8 +35,8 @@ public class OrderController {
     @GetMapping("/{orderId}")
     @Operation(summary = "Get order by ID")
     public ResponseEntity<ApiResponse<OrderDTO>> getOrderById(
-            @PathVariable UUID userId,
-            @PathVariable UUID orderId) {
+            @PathVariable Long userId,
+            @PathVariable Long orderId) {
         OrderDTO order = orderService.getOrderById(orderId);
         return ResponseEntity.ok(ApiResponse.success(order));
     }
@@ -46,7 +44,7 @@ public class OrderController {
     @GetMapping
     @Operation(summary = "Get user's orders")
     public ResponseEntity<ApiResponse<Page<OrderDTO>>> getUserOrders(
-            @PathVariable UUID userId,
+            @PathVariable Long userId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Page<OrderDTO> orders = orderService.getUserOrders(userId, page, size);
@@ -56,8 +54,8 @@ public class OrderController {
     @PatchMapping("/{orderId}/status")
     @Operation(summary = "Update order status")
     public ResponseEntity<ApiResponse<OrderDTO>> updateOrderStatus(
-            @PathVariable UUID userId,
-            @PathVariable UUID orderId,
+            @PathVariable Long userId,
+            @PathVariable Long orderId,
             @RequestParam Order.OrderStatus status) {
         OrderDTO order = orderService.updateOrderStatus(orderId, status);
         return ResponseEntity.ok(ApiResponse.success("Đã cập nhật trạng thái đơn hàng", order));

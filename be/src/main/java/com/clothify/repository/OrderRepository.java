@@ -11,24 +11,23 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, UUID> {
+public interface OrderRepository extends JpaRepository<Order, Long> {
 
     Optional<Order> findByOrderNumber(String orderNumber);
 
-    Page<Order> findByUserId(UUID userId, Pageable pageable);
+    Page<Order> findByUserId(Long userId, Pageable pageable);
 
-    List<Order> findByUserIdOrderByCreatedAtDesc(UUID userId);
+    List<Order> findByUserIdOrderByCreatedAtDesc(Long userId);
 
-    Page<Order> findByUserIdAndStatus(UUID userId, Order.OrderStatus status, Pageable pageable);
+    Page<Order> findByUserIdAndStatus(Long userId, Order.OrderStatus status, Pageable pageable);
 
     @Query("SELECT o FROM Order o WHERE o.createdAt BETWEEN :startDate AND :endDate")
     List<Order> findByDateRange(@Param("startDate") LocalDateTime startDate,
             @Param("endDate") LocalDateTime endDate);
 
     @Query("SELECT COUNT(o) FROM Order o WHERE o.user.id = :userId AND o.status = :status")
-    Long countByUserIdAndStatus(@Param("userId") UUID userId,
+    Long countByUserIdAndStatus(@Param("userId") Long userId,
             @Param("status") Order.OrderStatus status);
 }

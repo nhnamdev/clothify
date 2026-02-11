@@ -7,10 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, UUID> {
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     Optional<Category> findBySlug(String slug);
 
@@ -18,7 +17,7 @@ public interface CategoryRepository extends JpaRepository<Category, UUID> {
 
     List<Category> findByParentIsNullAndIsActiveTrue();
 
-    List<Category> findByParentIdAndIsActiveTrue(UUID parentId);
+    List<Category> findByParentIdAndIsActiveTrue(Long parentId);
 
     @Query("SELECT c FROM Category c WHERE c.isActive = true ORDER BY c.displayOrder ASC")
     List<Category> findAllActiveOrderByDisplayOrder();

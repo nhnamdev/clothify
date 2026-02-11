@@ -6,12 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
-public interface AddressRepository extends JpaRepository<Address, UUID> {
+public interface AddressRepository extends JpaRepository<Address, Long> {
 
-    List<Address> findByUserIdOrderByIsDefaultDesc(UUID userId);
+    List<Address> findByUserIdOrderByIsDefaultDesc(Long userId);
 
-    Optional<Address> findByUserIdAndIsDefaultTrue(UUID userId);
+    Optional<Address> findByUserIdAndIsDefaultTrue(Long userId);
 }

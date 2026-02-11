@@ -18,9 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
-
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +34,7 @@ public class OrderService {
     private final CartItemRepository cartItemRepository;
     private final ModelMapper modelMapper;
 
-    public OrderDTO createOrder(UUID userId, CreateOrderRequest request) {
+    public OrderDTO createOrder(Long userId, CreateOrderRequest request) {
         Profile user = profileRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -56,13 +54,13 @@ public class OrderService {
             discountCode = discountCodeRepository.findValidDiscountCode(request.getDiscountCode(), LocalDateTime.now())
                     .orElse(null);
             if (discountCode != null) {
-                if (discountCode.getMinPurchaseAmount() == null || 
-                    subtotal.compareTo(discountCode.getMinPurchaseAmount()) >= 0) {
-                    
+                if (discountCode.getMinPurchaseAmount() == null
+                        || subtotal.compareTo(discountCode.getMinPurchaseAmount()) >= 0) {
+
                     if (discountCode.getType() == DiscountCode.DiscountType.percentage) {
                         discountAmount = subtotal.multiply(discountCode.getValue()).divide(BigDecimal.valueOf(100));
-                        if (discountCode.getMaxDiscountAmount() != null && 
-                            discountAmount.compareTo(discountCode.getMaxDiscountAmount()) > 0) {
+                        if (discountCode.getMaxDiscountAmount() != null
+                                && discountAmount.compareTo(discountCode.getMaxDiscountAmount()) > 0) {
                             discountAmount = discountCode.getMaxDiscountAmount();
                         }
                     } else {
@@ -142,20 +140,20 @@ public class OrderService {
     }
 
     @Transactional(readOnly = true)
-    public OrderDTO getOrderById(UUID orderId) {
+    public OrderDTO getOrderById(Long orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
         return convertToDTO(order);
     }
 
     @Transactional(readOnly = true)
-    public Page<OrderDTO> getUserOrders(UUID userId, int page, int size) {
+    public Page<OrderDTO> getUserOrders(Long userId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
         Page<Order> orders = orderRepository.findByUserId(userId, pageable);
         return orders.map(this::convertToDTO);
     }
 
-    public OrderDTO updateOrderStatus(UUID orderId, Order.OrderStatus status) {
+    public OrderDTO updateOrderStatus(Long orderId, Order.OrderStatus status) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
 

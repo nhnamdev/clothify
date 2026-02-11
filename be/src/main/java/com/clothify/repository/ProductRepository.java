@@ -11,16 +11,15 @@ import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, UUID> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Optional<Product> findBySlug(String slug);
 
     Page<Product> findByIsActiveTrue(Pageable pageable);
 
-    Page<Product> findByCategoryIdAndIsActiveTrue(UUID categoryId, Pageable pageable);
+    Page<Product> findByCategoryIdAndIsActiveTrue(Long categoryId, Pageable pageable);
 
     List<Product> findByIsNewTrueAndIsActiveTrue();
 

@@ -6,16 +6,15 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
-public interface WishlistRepository extends JpaRepository<Wishlist, UUID> {
+public interface WishlistRepository extends JpaRepository<Wishlist, Long> {
 
-    List<Wishlist> findByUserId(UUID userId);
+    List<Wishlist> findByUserId(Long userId);
 
-    Optional<Wishlist> findByUserIdAndProductId(UUID userId, UUID productId);
+    Optional<Wishlist> findByUserIdAndProductId(Long userId, Long productId);
 
-    boolean existsByUserIdAndProductId(UUID userId, UUID productId);
+    boolean existsByUserIdAndProductId(Long userId, Long productId);
 
-    void deleteByUserIdAndProductId(UUID userId, UUID productId);
+    void deleteByUserIdAndProductId(Long userId, Long productId);
 }

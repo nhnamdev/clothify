@@ -20,9 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
-
 
 @Service
 @RequiredArgsConstructor
@@ -36,14 +34,14 @@ public class CartService {
     private final ProductService productService;
     private final ModelMapper modelMapper;
 
-    public List<CartItemDTO> getCart(UUID userId) {
+    public List<CartItemDTO> getCart(Long userId) {
         List<CartItem> cartItems = cartItemRepository.findByUserId(userId);
         return cartItems.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
-    public CartItemDTO addToCart(UUID userId, AddToCartRequest request) {
+    public CartItemDTO addToCart(Long userId, AddToCartRequest request) {
         Profile user = profileRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -56,7 +54,7 @@ public class CartService {
                     .orElseThrow(() -> new RuntimeException("Product variant not found"));
         }
 
-        UUID finalVariantId = variant != null ? variant.getId() : null;
+        Long finalVariantId = variant != null ? variant.getId() : null;
         Optional<CartItem> existingItem = cartItemRepository.findByUserIdAndProductIdAndVariantId(
                 userId, request.getProductId(), finalVariantId);
 
@@ -76,7 +74,7 @@ public class CartService {
         return convertToDTO(cartItem);
     }
 
-    public CartItemDTO updateCartItem(UUID cartItemId, Integer quantity) {
+    public CartItemDTO updateCartItem(Long cartItemId, Integer quantity) {
         CartItem cartItem = cartItemRepository.findById(cartItemId)
                 .orElseThrow(() -> new RuntimeException("Cart item not found"));
 
@@ -90,15 +88,15 @@ public class CartService {
         return convertToDTO(cartItem);
     }
 
-    public void removeFromCart(UUID cartItemId) {
+    public void removeFromCart(Long cartItemId) {
         cartItemRepository.deleteById(cartItemId);
     }
 
-    public void clearCart(UUID userId) {
+    public void clearCart(Long userId) {
         cartItemRepository.deleteByUserId(userId);
     }
 
-    public Long getCartItemCount(UUID userId) {
+    public Long getCartItemCount(Long userId) {
         return cartItemRepository.countByUserId(userId);
     }
 
